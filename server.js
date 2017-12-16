@@ -125,6 +125,9 @@ socket.on('chat message', function(msg){
 socket.on('chat message', function(msg){
     console.log('message: ' + msg);
   });
+socket.on('testx', function(msg){
+    console.log('testx: ' + msg);
+  });
 
 
 socket.on('disconnect', function(){
