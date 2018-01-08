@@ -173,25 +173,25 @@ app.get("/action/:action/:ID", function (req, res) {
 io.on('connection', function (socket) {
     //console.log('user connected');    
     io.emit('onconnection', socket.id);
-    
-    socket.on('chat message', function (msg) {
-        io.emit('chat message', msg);
-        console.log('message emitted: ' + msg);
-    });
-
-    socket.on('disconnect', function () {
-        console.log('user disconnected');
-    });
-    
-    socket.on('storeClientInfo', function (data) {
-        
-        var clientInfo = new Object();
-        clientInfo.customId = data.customId;
-        clientInfo.socketId = socket.id;
-        console.log('clients push: socketId= ' + socket.id +' & ' + data.customId);
-        
-        io.emit('onconnection', socket.id);
-    });
+//    
+//    socket.on('chat message', function (msg) {
+//        io.emit('chat message', msg);
+//        console.log('message emitted: ' + msg);
+//    });
+//
+//    socket.on('disconnect', function () {
+//        console.log('user disconnected');
+//    });
+//    
+//    socket.on('storeClientInfo', function (data) {
+//        
+//        var clientInfo = new Object();
+//        clientInfo.customId = data.customId;
+//        clientInfo.socketId = socket.id;
+//        console.log('clients push: socketId= ' + socket.id +' & ' + data.customId);
+//        
+//        io.emit('onconnection', socket.id);
+//    });
     
 });
 
