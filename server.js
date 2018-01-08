@@ -165,17 +165,6 @@ app.get("/action/:action/:ID", function (req, res) {
     res.send(data);
 });
 
-//socket.on('chat message', function(msg){
-//    console.log('message: ' + msg);
-//  });
-//socket.on('testx', function(msg){
-//    console.log('testx: ' + msg);
-//  });
-
-socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
-
 /*
  app.get('/chat', function(req, res){
  res.render('chat.html');
