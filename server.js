@@ -171,8 +171,7 @@ app.get("/action/:action/:ID", function (req, res) {
  });
  */
 io.on('connection', function (socket) {
-    console.log('user connected');
-    
+    //console.log('user connected');    
     io.emit('onconnection', socket.id);
     
     socket.on('chat message', function (msg) {
