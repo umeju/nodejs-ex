@@ -134,9 +134,6 @@ app.get('/pages/:pagename', function (req, res) {
 });
 
 app.get("/action/:action/:ID", function (req, res) {
-    
-    console.log('-------------------------------------');
-    
     //var event = req.params.event;
     var data = {
         "pages": {
@@ -167,6 +164,17 @@ app.get("/action/:action/:ID", function (req, res) {
     console.log('**********');
     res.send(data);
 });
+
+//socket.on('chat message', function(msg){
+//    console.log('message: ' + msg);
+//  });
+//socket.on('testx', function(msg){
+//    console.log('testx: ' + msg);
+//  });
+
+socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
 
 /*
  app.get('/chat', function(req, res){
