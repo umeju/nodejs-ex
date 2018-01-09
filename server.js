@@ -192,9 +192,7 @@ io.on('connection', function (socket) {
 //        
 //        io.emit('onconnection', socket.id);
 //    });
-    
 });
-
 
 // error handling
 app.use(function (err, req, res, next) {
@@ -211,5 +209,4 @@ http.listen(port, function () {
     console.log('Server - running on http://%s:%s', ip, port);
 });
 //console.log('Server running on http://%s:%s', ip, port);
-
 // module.exports = http;
