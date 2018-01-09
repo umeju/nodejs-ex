@@ -81,9 +81,9 @@ h2 {
     height: 150px;
     /*background-image: url(http://www.ugentocasa.it/assets/front/images/ugentocasa_menu_b.png);*/
     /*background-image: url(../../common/img/logo-immobiliare-ugento-casa.png);*/
-    background-image: url(http://www.di-vision.org/cdn/images/logo-immobiliare-ugento-casa.png)
-        /*background-size: cover;*/
-        background-size: contain;
+    background-image: url(http://www.di-vision.org/cdn/images/logo-immobiliare-ugento-casa.png);
+    /*background-size: cover;*/
+    background-size: contain;
     margin: 0 auto;
     /* border: 1px solid red; */
 }
