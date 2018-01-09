@@ -1,28 +1,21 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="hubanero - Spicy Technologies">
-    <meta name="author" content="hubanero Red Savina">
-    
-    <title>hubanero - Spicy Technologies</title>
-    
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    
-    <link href="../common/css/ugentocasa.css" rel="stylesheet" type="text/css"/>
-    
-    <link rel="stylesheet" type="text/css" 
-        href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/base/jquery-ui.css">    
-  </head>
-  
-  
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="hubanero - Spicy Technologies">
+<meta name="author" content="hubanero Red Savina">
+<title>hubanero - Spicy Technologies</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
+      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<link href="http://www.di-vision.org/cdn/ugentocasa.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" type="text/css" 
+    href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/base/jquery-ui.css">
+</head>
 <body class="full">
-    
-    <!--example-template : template content-placeholder-->
 <script id="example-template" type="text/x-handlebars-template">
 <div  id="news-hub">
     {{#sites}}
@@ -70,8 +63,7 @@
     {{/sites}}
 </div>
 </script>
-
-        <!--START TEMPLATE TEST-->
+<!--START TEMPLATE TEST-->
 <div>
     <!-- Navigation -->
     <nav class="navbar navbar-fixed-top" role="navigation">
@@ -166,67 +158,22 @@
         </div>
     </div><!--end div news-hub2-->
 </div>
-        <!--END TEMPLATE TEST-->
-        <span id="nextFoto" class="next"></span>
-        <span id="prevFoto" class="prev"></span>
-        
-        
-        
-        
-        
-        
-        
-    
-    
- <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>   
-    
+<!--END TEMPLATE TEST-->
+<span id="nextFoto" class="next"></span>
+<span id="prevFoto" class="prev"></span>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>    
 <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
-  
 <script
   src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
   integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
   crossorigin="anonymous"></script>
-  
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
-        crossorigin="anonymous"></script>
-    
-    
-
-
-<script src="/socket.io/socket.io.js"></script>
+        crossorigin="anonymous"></script><script src="/socket.io/socket.io.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-<script>
-$(function () {
-        var socket = io();
-        
-//        $('form').submit(function(){
-//            socket.emit('chat message', $('#m').val());
-//            $('#m').val('');
-//            return false;
-//        });
-        
-//        socket.on('chat message', function(msg){
-//            $('#messages').append($('<li>').text(msg));
-//        });
-        
-//        socket.on('storeClientInfo', function(msg){
-//            socket.emit('no','-----------------');
-//        });
-        
-//        socket.emit('storeClientInfo','asdasd');
-
-//        socket.on('redir', function(id){
-//          socket.emit('no','no-----------------');
-//            alert('0');
-//        });
-});
-  
-</script>
-
 <script>
     var QueryString = function ()
     {
@@ -287,8 +234,7 @@ $(function () {
     var _speed = 3000;
     var startMySlide;
     
-    function jsonCallback(data)
-    {
+    function jsonCallback(data){
         $.each(data.sites, function (key, val) {
             console.log(data);
             if (val.titolo !== '') {
@@ -299,11 +245,9 @@ $(function () {
     
     function getNews(urlJson)
     {
-        $('<div></div>')
-                .attr('id','spinner')
-//                .hide()
-                .appendTo('body');
-            
+        $('<div></div>').attr('id','spinner')
+    //                  .hide()
+                        .appendTo('body');
         $.ajax({
             type: 'GET',
             url: urlJson,
@@ -361,8 +305,7 @@ $(function () {
         return ret;
     });
     
-    function goCompile(returnData)
-    {
+    function goCompile(returnData){
 //            $.getJSON(returnedData, function (data){
         var theCompiledHtml = theTemplate(returnData);
         $('.content-placeholder').html(theCompiledHtml);
@@ -424,15 +367,11 @@ $(function () {
         });
     }
     
-//<<<<<<< HEAD
-//=======
 //    function changeBackground(){
 //        $('.full').css({
 //            'background' : "url(http://www.di-vision.org/cdn/images/natale2.jpg)",
 //        });
 //    }
-//    
-//>>>>>>> bdbc1ddda3e2390407d37972fd178d865d0c1254
     function countDownReload()
     {
         cdr = setTimeout(
@@ -469,9 +408,7 @@ $(function () {
     }
     
     (function (exports) {
-        
 //        var socket = io.connect(socketURI);
-        
         var socket = io();
         socket.on('connection', function (data)
         {
