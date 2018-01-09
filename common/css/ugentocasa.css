@@ -9,8 +9,7 @@ body {
 .full {
     /*background: url(https://i.ytimg.com/vi/9oAd9J8vpRA/maxresdefault.jpg) no-repeat center center fixed;*/
     /*background: url(http://www.residencelepalmesalento.it/lepalme/Itinerari/Repository/1114cocoloco2.jpg)*/
-    background: url(http://www.di-vision.org/cdn/images/natale-marrone.jpg)
-
+    background: url(http://www.di-vision.org/cdn/images/natale-1.jpg)
         no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -62,16 +61,18 @@ h2 {
 .offset2{
     margin-right: 16px;
 }
-/*#logo {
-    position: relative;
-    top: 0;
-    left: 0px;
-    width: 356px;
-    height: 85px;
-    background-image: url(http://www.ugentocasa.it/assets/front/images/ugentocasa_menu_b.png);
-    background-size: cover;
-    margin: 0 auto;
-}*/
+/*
+    #logo {
+        position: relative;
+        top: 0;
+        left: 0px;
+        width: 356px;
+        height: 85px;
+        background-image: url(http://www.ugentocasa.it/assets/front/images/ugentocasa_menu_b.png);
+        background-size: cover;
+        margin: 0 auto;
+    }
+*/
 #logo {
     position: relative;
     top: 7px;
@@ -79,15 +80,15 @@ h2 {
     width: 740px;
     height: 150px;
     /*background-image: url(http://www.ugentocasa.it/assets/front/images/ugentocasa_menu_b.png);*/
-    background-image: url(../../common/img/logo-immobiliare-ugento-casa.png);
-    /*background-size: cover;*/
-    background-size: contain;
+    /*background-image: url(../../common/img/logo-immobiliare-ugento-casa.png);*/
+    background-image: url(http://www.di-vision.org/cdn/images/logo-immobiliare-ugento-casa.png)
+        /*background-size: cover;*/
+        background-size: contain;
     margin: 0 auto;
     /* border: 1px solid red; */
 }
-.slide{
+.slide{}
 
-}
 .imageGroup {
     text-align: center;
 
@@ -219,31 +220,31 @@ h2 {
 #successivo{
     height: 100%;
     width: 100%;
-    background: transparent url("../../common/img/dx.png") no-repeat center right;
+    background: transparent url("http://www.di-vision.org/cdn/images/dx.png") no-repeat center right;
     position: absolute;
 }
 #precedente{
     height: 100%;
     width: 100%;
-    background: transparent url("../../common/img/sx.png") no-repeat center left;
+    background: transparent url("http://www.di-vision.org/cdn/images/sx.png") no-repeat center left;
     position: absolute;
 }
 #zoom{
     height: 100%;
     width: 100%;
-    background: black url("../../common/img/refresh_arrow_sign.png") no-repeat center center;
+    background: black url("http://www.di-vision.org/cdn/images/refresh_arrow_sign.png") no-repeat center center;
     position: absolute;
 }
 #imageBigSize{
     height: 100%;
     width: 100%;
-    background: black url("../../common/img/sx.png") no-repeat center center;
+    background: black url("http://www.di-vision.org/cdn/images/sx.png") no-repeat center center;
     position: absolute;
 }
 #sorry{
     height: 100%;
     width: 100%;
-    background: transparent url("../../common/img/sorry.png") no-repeat center center;
+    background: transparent url("http://www.di-vision.org/cdn/images/sorry.png") no-repeat center center;
     position: absolute;
 }
 .giada{
