@@ -10,7 +10,7 @@ Object.assign = require('object-assign')
 app.engine('html', require('ejs').renderFile);
 app.use(morgan('combined'));
 
-var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
+var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8081,
         ip = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
         mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
         mongoURLLabel = "";
@@ -62,6 +62,8 @@ var initDb = function (callback) {
 app.use('/pages', express.static(__dirname + '/pages'));
 app.use('/action', express.static(__dirname + '/action'));
 app.use('/common', express.static(__dirname + '/common'));
+app.use('/control', express.static(__dirname + '/control'));
+app.use('/remote', express.static(__dirname + '/remote'));
 
 app.get('/', function (req, res) {
     // try to initialize the db on every request if it's not already
@@ -115,6 +117,7 @@ app.get('/chat', function (req, res) {
 });
 
 app.get('/pages/:pagename', function (req, res) {
+    console.log('/pages/:pagename');
     // try to initialize the db on every request if it's not already
     // initialized.
     if (!db) {
@@ -125,7 +128,7 @@ app.get('/pages/:pagename', function (req, res) {
         // Create a document with request IP and current time of request
         col.insert({ip: req.ip, date: Date.now()});
         col.count(function (err, count) {
-            res.render('chat.html', {pageCountMessage: count, dbInfo: dbDetails});
+            //res.render('chat.html', {pageCountMessage: count, dbInfo: dbDetails});
         });
     } else {
         pageUrl = req.params.pagename;
@@ -133,7 +136,31 @@ app.get('/pages/:pagename', function (req, res) {
     }
 });
 
+app.get('/remote/:user/:ID', function (req, res) {
+    console.log('/remote/:user/:ID');
+    /*
+    var data = {
+        "pages": {
+            "user": req.params.action,
+            "ID": req.params.ID
+        }
+    };
+    */
+    if (!db) {
+        initDb(function (err) {});
+    }
+    pageUrl = req.params.user;
+    ID = req.params.ID;
+    
+    console.log("pageUrl: " + pageUrl);
+    console.log('remote/index.html');
+    
+//    res.render('remote/index.html', { ID:req.params.ID});
+    res.render('remote_ugentocasa.html', {ID:req.params.ID});
+});
+
 app.get("/action/:action/:ID", function (req, res) {
+    console.log("/action/:action/:ID");
     //var event = req.params.event;
     var data = {
         "pages": {
@@ -151,17 +178,14 @@ app.get("/action/:action/:ID", function (req, res) {
 //          data.pages.ID + '-' + data.pages.action
     );
     
-    console.log("azione");
+    console.log("action");
     
 //    io.emit('chat message', "emit this message");
     //  socket.volatile.emit(data.pages.ID+'-'+data.pages.action, data.pages.ID+'-'+data.pages.action);
 //            req.query = {"city" : selectedCity}
     console.log('req.query:'+req.query);
-    console.log('**********');
     console.log("data.pages.ID: " + data.pages.ID);
-    console.log('**********');
     console.log("data.pages.action: " + data.pages.action);
-    console.log('**********');
     res.send(data);
 });
 
