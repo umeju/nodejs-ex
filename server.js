@@ -8,9 +8,14 @@ var express = require('express'),
 Object.assign = require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
-app.use(morgan('combined'));
 
-var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8081,
+//app.engine('.html', require('ejs').__express);
+app.set('view engine', 'html');
+//app.set('views',__dirname+'/views');
+
+//app.use(morgan('combined'));
+
+var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
         ip = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
         mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
         mongoURLLabel = "";
@@ -83,6 +88,26 @@ app.get('/', function (req, res) {
     }
 });
 
+app.get('/test/:userid', function(req, res) {
+    userid = req.params.userid
+    console.log(userid);
+    res.render('remote_ugentocasa.ejs', {userid: userid, dbInfo: {type: "type", url: "url"}});
+});
+
+/*
+app.get('/about', function(req, res) {
+    var contacts = [
+        { name: 'skype', value: 'hubanero' },
+        { name: 'twitter', value: '@hubanero.it' }
+    ];
+    var presentation = "Hi, my name is hubanero.";
+    //rendering variables in to the page
+    res.render('about.ejs', {
+        contacts: contacts,
+        presentation: presentation
+    });
+});
+
 app.get('/pagecount', function (req, res) {
     // try to initialize the db on every request if it's not already
     // initialized.
@@ -115,7 +140,7 @@ app.get('/chat', function (req, res) {
         res.render('chat.html', {pageCountMessage: null});
     }
 });
-
+*/
 app.get('/pages/:pagename', function (req, res) {
     console.log('/pages/:pagename');
     // try to initialize the db on every request if it's not already
@@ -124,6 +149,7 @@ app.get('/pages/:pagename', function (req, res) {
         initDb(function (err) {});
     }
     if (db) {
+        console.log('db in...');
         var col = db.collection('counts');
         // Create a document with request IP and current time of request
         col.insert({ip: req.ip, date: Date.now()});
@@ -132,12 +158,14 @@ app.get('/pages/:pagename', function (req, res) {
         });
     } else {
         pageUrl = req.params.pagename;
-        res.render('pages/'+ pageUrl +'.html', {pageCountMessage: null});
+        console.log("pageUrl: " + pageUrl);
+        res.render('pages/'+ pageUrl +'.html', {ID: '00021'});
     }
 });
 
-app.get('/remote/:user/:ID', function (req, res) {
-    console.log('/remote/:user/:ID');
+//app.get('/remote/:user/:ID', function (req, res) {
+app.get('/remotes/:user/:ID', function (req, res) {
+//    console.log('/remote/:user/:ID');
     /*
     var data = {
         "pages": {
@@ -146,17 +174,11 @@ app.get('/remote/:user/:ID', function (req, res) {
         }
     };
     */
-    if (!db) {
-        initDb(function (err) {});
-    }
-    pageUrl = req.params.user;
-    ID = req.params.ID;
+    user = req.params.user;
+    aaa = req.params.ID;
+    console.log('/remotes/:'+user+'/:'+aaa);
     
-    console.log("pageUrl: " + pageUrl);
-    console.log('remote/index.html');
-    
-//    res.render('remote/index.html', { ID:req.params.ID});
-    res.render('remote_ugentocasa.html', {ID:req.params.ID});
+    res.render('remote_ugentocasa.html', {aaa: aaa, user: user});
 });
 
 app.get("/action/:action/:ID", function (req, res) {
@@ -168,20 +190,20 @@ app.get("/action/:action/:ID", function (req, res) {
             "ID": req.params.ID
         }
     };
-    
     var referID = data.pages.ID;
     var referAction = data.pages.action;
+    
+    console.log("/action/:"+referAction+"/:"+referID);
+    
+    
     // the user was found and is available in req.user
     io.emit(
         data.pages.ID + '-' + data.pages.action,
         req.query
 //          data.pages.ID + '-' + data.pages.action
     );
-    
-    console.log("action");
-    
 //    io.emit('chat message', "emit this message");
-    //  socket.volatile.emit(data.pages.ID+'-'+data.pages.action, data.pages.ID+'-'+data.pages.action);
+//  socket.volatile.emit(data.pages.ID+'-'+data.pages.action, data.pages.ID+'-'+data.pages.action);
 //            req.query = {"city" : selectedCity}
     console.log('req.query:'+req.query);
     console.log("data.pages.ID: " + data.pages.ID);
@@ -217,17 +239,14 @@ io.on('connection', function (socket) {
 //        io.emit('onconnection', socket.id);
 //    });
 });
-
 // error handling
 app.use(function (err, req, res, next) {
     console.error(err.stack);
-    res.status(500).send('Something bad happened!');
+    res.status(500).send('500 error! Something bad happened!');
 });
-
 initDb(function (err) {
     console.log('Error connecting to Mongo. Message:\n' + err);
 });
-
 //http.listen(port, ip);
 http.listen(port, function () {
     console.log('Server - running on http://%s:%s', ip, port);
