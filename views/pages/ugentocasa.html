@@ -45,12 +45,7 @@
                 {{/caratteristiche}}
             </ul>
             
-            <!--div class="ul-pics">
-                {{#foto}}
-                    <div class="allPics collapse" data-src="{{--------------this}}" 
-                            data-idenx="{{@---------index}}"> {{@-------index}} </div>
-                {{/foto}}
-            </div-->
+            <!-- code * -->
             
             <p class="bigImage">
                 <img data-urlimg="{{foto_evidenza.[0]}}" class="darkBg show" src="{{foto_evidenza.[0]}}" />
@@ -62,6 +57,15 @@
     </div>
     {{/sites}}
 </div>
+<!--
+*
+div class="ul-pics">
+    {{#foto}}
+        <div class="allPics collapse" data-src="{{--------------this}}" 
+            data-idenx="{{@---------index}}"> {{@-------index}} </div>
+            {{/foto}}
+        </div
+-->
 </script>
 <!--START TEMPLATE TEST-->
 <div>
@@ -199,11 +203,9 @@
         }
         return query_string;
     }();
-    // get id from URL
-    var userID = QueryString.ID;
-//        alert(userID);
-//        get info channell
-    var ch = QueryString.ch;
+
+    var userID = "<%= ID %>";
+
     _TIME_T0_REFRESH = 10*60*1000;
     var time = 12100;
     var cdr;
@@ -235,12 +237,13 @@
     var startMySlide;
     
     function jsonCallback(data){
-        $.each(data.sites, function (key, val) {
-            console.log(data);
-            if (val.titolo !== '') {
-                // avoid empty news
-            }
-        });
+//        $.each(data.sites, function (key, val) {
+//            console.log(data); get entire sites: <array>
+//            if (val.titolo !== '') {
+//                // avoid empty news
+//            }
+//        });
+        return;
     };
     
     function getNews(urlJson)
@@ -326,8 +329,25 @@
 //        current3 = $('.bigImage .show').not('.collapse');
 //        current2 = $('.bigImage:visible');
         
-        if(current.length == 0){
-            $('.bigImage:visible').eq(0).addClass('show').fadeIn();
+//        if(current.length == 0){
+        // handler errore scomparsa foto:
+        if($('.bigImage img:visible').length == 0){
+                console.log('drama2!');
+                $('.bigImage:visible').find('img').eq(0).css("display", "block");
+                $('.bigImage:visible').addClass('show');
+                current = $('.bigImage:visible');
+                current = current.parent().find('.darkBg').eq(0);
+                
+            // TODO delete this if:
+            if(current.length == 0){
+                console.log('current.length = 0'); // old test
+                current = $('.bigImage:visible');
+                current.find('img');
+//                current = $('.bigImage:visible .show');
+            }
+            
+//            current = $('.bigImage img:visible')
+//            $('.bigImage:visible').find('img').eq(0).fadeIn();
         }
 //        current.fadeIn().delay(speed).die();
         next = current.next().length ? current.next().fadeIn() : current.parent().children(':first').fadeIn();
@@ -336,8 +356,7 @@
         startMySlide = setTimeout(slideShow, _timeout);
     }
     
-    function startInnerFade()
-    { // slider immobili
+    function startInnerFade() { // slider immobili
         $('#news-hub').innerFade({
 //            animationtype: 'slide',
             animationtype: 'slideOver',
@@ -352,8 +371,7 @@
         });
     }
     
-    function startSliderServizi()
-    {
+    function startSliderServizi() {
         // slider servizi forniti dall'agenzia
         $('#news-hub2').innerFade({
 //            animationtype: 'slide',
@@ -372,23 +390,19 @@
 //            'background' : "url(http://www.di-vision.org/cdn/images/natale2.jpg)",
 //        });
 //    }
-    function countDownReload()
-    {
+    function countDownReload() {
         cdr = setTimeout(
                 function() {
                     location.reload();
                 }, _TIME_T0_REFRESH);
     }
     
-    function createDivBigImage()
-    {
+    function createDivBigImage() {
         _showImageTime = 5500;
 //        get visible image
         bigImage = $('.bigImage img:visible');
-        
         bigImage2 = $('.allPics:first-child');
 //        create div with #imageBigSize
-
         if($('#imageBigSize').length){
             $('#imageBigSize').remove();
         }
@@ -410,13 +424,11 @@
     (function (exports) {
 //        var socket = io.connect(socketURI);
         var socket = io();
-        socket.on('connection', function (data)
-        {
+        socket.on('connection', function (data) {
             console.log('socket connection on');
         });
         
-        socket.on(userID + '-left', function (data)
-        {
+        socket.on(userID + '-left', function (data) {
             console.log(userID + ' left connect!');
             clearTimeout(cdr);
 //                mostra feedback freccia a sx
@@ -433,8 +445,7 @@
             countDownReload();
         });
         
-        socket.on(userID + '-right', function (data)
-        {
+        socket.on(userID + '-right', function (data) {
             console.log(userID + ' right connect!');
             clearTimeout(cdr);
 //                mostra feedback freccia a dx
@@ -452,22 +463,18 @@
 //            restartInnerFade();
         });
         
-        socket.on(userID + '-refresh2', function (data)
-        {
+        socket.on(userID + '-refresh2', function (data) {
             console.log('refresh2');
             location.reload();
         });
         //zoom *****
-        socket.on(userID + '-zoom', function (data)
-        {
-//                fermo il conto alla rovescia del refresh pag
+        socket.on(userID + '-zoom', function (data) {
+// fermo il conto alla rovescia del refresh pag
             clearTimeout(cdr);
             createDivBigImage();
             countDownReload();
         });
-                
-        socket.on(userID + '-find', function (data)
-        {
+        socket.on(userID + '-find', function (data) {
             console.log(data.city);
             selectedCity = data.city;
             console.log(indirizzi[selectedCity]);
@@ -475,7 +482,6 @@
             getNews(indirizzi[selectedCity]);
 //            getNews('http://www.ugentocasa.it/lista/index/vendita/1/15/json/');
         });
-        
         exports.socket = socket;
     })(window);
 
@@ -508,9 +514,8 @@ $(function(){
     that = this;
     returnData = getNews(indirizzi.ugento);
     setInterval(
-            function(){
-                imgNumber = Math.floor((Math.random() * 3) + 1);
-        
+        function(){
+            imgNumber = Math.floor((Math.random() * 3) + 1);
         $('.full').css({
             "background-image" : "url(http://www.di-vision.org/cdn/images/natale"+imgNumber+".jpg)",
             "backgroud-repeat" : "no-repeat",
@@ -521,7 +526,6 @@ $(function(){
             "background-size" : "cover",
             "margin" : "0 auto"
         });
-        
     }, 2*60*1000 );
 
 });
@@ -550,13 +554,11 @@ $(function(){
         'totalItemsContainer': 		null,
         'callback_index_update': 	null
     };
-
     $(function() {
         window.isActive = true;
         $(window).focus(function() { this.isActive = true; });
         $(window).blur(function() { this.isActive = false; });
     });
-
     $.fn.innerFade = function(options) {
         return this.each(function() {
             $fade_object = new Object();
@@ -643,7 +645,6 @@ $(function(){
             }
         });
     };
-
     /**
      * Public function to change to a specific slide. This is expecting a zero-index slide number.
      * @param {Number} slide_number Zero-indexed slide number
@@ -660,7 +661,6 @@ $(function(){
             };
         });
     };
-
     /**
      * Fades the slideshow to the item selected from the previous item
      * @param {Object} $fade_object The object that contains the settings, elements and container for this slideshow
@@ -752,7 +752,6 @@ $(function(){
             $.updateIndexes($fade_object, toShow);
         };
     };
-
     /**
      * Fades to the item of your choosing and establishes the timeout for the next item to fade to
      * @param {Object} $fade_object The object that contains the settings, elements and container for this slideshow
@@ -792,7 +791,6 @@ $(function(){
         var timeout = (firstRun && $fade_object.settings.startDelay) ? $fade_object.settings.startDelay : $fade_object.settings.timeout;
         $($fade_object.container).data('current_timeout', setTimeout((function() { $.fadeTimeout($fade_object, toShow, toHide, false); }), timeout));
     };
-
     /* Allows the unbind function to be called from javascript */
     $.fn.innerFadeUnbind = function() {
         return this.each(function(index) {
@@ -800,7 +798,6 @@ $(function(){
                 $.stopSlideshow($fade_object);
         });
     };
-
     /**
      * Stops the slideshow
      * @param {Object} $fade_object The object that contains the settings, elements and container for this slideshow
@@ -809,7 +806,6 @@ $(function(){
         clearTimeout($($fade_object.container).data('current_timeout'));
         $($fade_object.container).data('current_timeout', null);
     };
-
     /**
      * Establishes the Next and Previous link behavior
      * @param {Object} $fade_object The object that contains the settings, elements and container for this slideshow
@@ -841,7 +837,6 @@ $(function(){
                 $.fadeToItem($fade_object, previousElementIndex, currentElementIndex);
             });
     };
-
     /**
      * Establishes the Pause Button
      * @param {Object} $fade_object The object that contains the settings, elements and container for this slideshow
@@ -874,7 +869,6 @@ $(function(){
             }
         });
     };
-
     /**
      * Establishes the Cancel Button
      * @param {Object} $fade_object The object that contains the settings, elements and container for this slideshow
@@ -885,7 +879,6 @@ $(function(){
                 $.stopSlideshow($fade_object);
         });
     };
-
     /**
      * Updates the indexes and adds an active class to the visible item
      * @param {Object} $fade_object The object that contains the settings, elements and container for this slideshow
@@ -900,7 +893,6 @@ $(function(){
                 $fade_object.settings.callback_index_update.call(this, toShow);
         };
     };
-
     /**
      * Creates handlers for the links created by the $.handleIndexes and $.generateIndexes functions
      * @param {Object} $fade_object The object that contains the settings, elements and container for this slideshow
@@ -918,7 +910,6 @@ $(function(){
                 };
         });
     };
-
     /**
      * Creates one link for each item in the slideshow, to show that item immediately
      * @param {Object} $fade_object The object that contains the settings, elements and container for this slideshow
@@ -932,7 +923,6 @@ $(function(){
                 $indexContainer.append($link);
         };
     };
-
     /**
      * Establishes links between the slide elements and index items in the indexContainer
      * @param {Object} $fade_object The object that contains the settings, elements and container for this slideshow
@@ -951,7 +941,6 @@ $(function(){
                 alert("There is a different number of items in the menu and slides. There needs to be the same number in both.\nThere are " + $indexContainerChildren.size() + " in the indexContainer.\nThere are " + $fade_object.elements.length + " in the slides container.");
         };
     };
-
     /**
      * Determines if the index container is empty or not. If its empty then it generates links, if its not empty
      * it links one to one
@@ -965,7 +954,6 @@ $(function(){
                 $.linkIndexes($fade_object);
         };
     };
-
     /**
      * Changes the text of the current item selector to the index of the current item
      * @param {Object} $fade_object The object that contains the settings, elements and container for this slideshow
@@ -975,7 +963,6 @@ $(function(){
         var $container = $($fade_object.settings.currentItemContainer);
         $container.text(current + 1);
     };
-
     /**
      * Changes the text of the total item selector to the total number of items
      * @param {Object} $fade_object The object that contains the settings, elements and container for this slideshow
