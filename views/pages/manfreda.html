@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TODO supply a title</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <!--start #example-template-->
+<script id="example-template" type="text/x-handlebars-template">
+    <div  id="news-hub">
+        {{#sites}}
+{{id}} 
+{{titolo}} 
+{{descrizione}}
+{{note}}
+<br>
+
+            {{#each categorie}}
+            {{id}}
+            <br>{{id}} - {{nome}} <br>
+                Key: {{@key}} Value = {{this}}
+                    
+                    {{#each this}}
+                        Key: {{@key}} Value = {{this}}
+                    {{/each}}
+            {{/each}}
+        {{/sites}}
+    </div>
+</script>
+
+<div class='content-placeholder'></div>
+        
+<span id="nextFoto" class="next"></span>
+<span id="prevFoto" class="prev"></span>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>    
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+  crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
+        crossorigin="anonymous"></script><script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="../../common/js/hub.js" type="text/javascript"></script>
+        <script src="../../common/js/innerFade.js" type="text/javascript"></script>
+    </body>
+</html>
