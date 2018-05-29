@@ -48,7 +48,10 @@ function getNews(urlJson){
         dataType: 'jsonp',
         success: function (json) { console.log('success!'); },
         error: function (e) { console.log(e.message); },
-        complete: function (jqXHR, textStatus ) { $("#spinner").remove(); }
+        complete: function (jqXHR, textStatus ) { 
+            $("#spinner").remove();
+            slideShow();
+        }
     });
 };
 
@@ -83,9 +86,7 @@ function goCompile(returnData) {
     });
     
     socket.on(userID + '-find', function (data) {
-        console.log(data.city);
-        console.log(indirizzi[selectedCity]);
-        getNews(indirizzi[selectedCity]);
+        
     });
     exports.socket = socket;
 })(window);
@@ -112,6 +113,13 @@ Handlebars.registerHelper('eachProperty', function(context, options) {
 });
 
 $(function(){
+    $('.next,.prev').click(function(ev){
+        boolean = true;
+//        $(this).addClass('test');
+        event.target.id == "nextFoto" ?  boolean = true : false;
+        Slide(boolean);
+    });
 //    returnData = getNews('http://www.hubanero.it/digitalmenu/backend/public/getmenu/1/1/');
     returnData = getNews('http://localhost:8000/articolo/getjson');
+    
 });
