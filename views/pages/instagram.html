@@ -112,8 +112,10 @@
     var startMySlide;
     
     function jsonCallback(data){
-        $.each(data.sites, function (key, val) {
-            console.log(data);
+//        $.each(data.sites, function (key, val) {
+        $.each(data.sites.hashtag.edge_hashtag_to_media.edges, function (key, val) {
+//            console.log(data);
+            $('.full').append('<img src="'+val.node.thumbnail_resources[0].src+'"/>');
         });
     };
     
@@ -169,7 +171,9 @@
     });
     
     function goCompile(returnData){
-//            $.getJSON(returnedData, function (data){
+//            $.getJSON("http://www.di-vision.org/instagram.json", function (data){
+//                console.log(data);
+//            });
         var theCompiledHtml = theTemplate(returnData);
         $('.content-placeholder').html(theCompiledHtml);
         startInnerFade();
@@ -331,8 +335,21 @@ $(function(){
 
     returnData = '';
     that = this;
-    returnData = getNews('https://www.instagram.com/explore/tags/hubanero/?__a=1');
+//    returnData = getNews('https://www.instagram.com/explore/tags/hubanero/?__a=1');
+    returnData = getNews('http://www.di-vision.org/instagram.json');
 
+/*
+ * immagine del post:
+ * data.sites.hashtag.edge_hashtag_to_top_posts.edges[0].node.display_url
+ * 
+ * thumnail 480x480
+ * data.sites.hashtag.edge_hashtag_to_media.edges[0].node.thumbnail_resources[3]
+ * data.sites.hashtag.edge_hashtag_to_media.edges[0].node.thumbnail_resources[3].src
+ * 
+ * 
+ * 
+ */
+//    returnData = getNews('https://api.instagram.com/v1/tags/coffee/media/recent?access_token=ACCESS-TOKEN&callback=jsonCallback');
 
 });
 /* inner fade */

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<head>
+  <title>TODO supply a title</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+  <style>
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: #388E3C !important;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+  </style>
+  <script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '264846143923249',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v2.12'
+    });
+
+    FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+});
+
+
+
+    FB.api(
+      '/1697923560421926/feed',
+      'GET',
+      {},
+      function(response) {
+        // alert('0');
+          console.log(response);
+      }
+    );
+    
+//    get feed .............ma serve il token d'accesso
+    FB.api(
+        '/www.hubanero.it/feed',
+        'GET',  {},
+        function(response) {
+            console.log(response);
+        }
+    );
+
+
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+
+</head>
+<body>
+  <!-- <a href="tel:555-555-5555"><img src="https://www.att.com/catalog/en/skus/images/apple-iphone%206s-rose%20gold-450x350.png" /></a> -->
+
+  <nav class="green darken-2">
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">
+        Your LOGO
+      </a>
+      <!-- <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a href="sass.html">Sass</a></li>
+    </ul> -->
+  </div>
+</nav>
+<main class="test green darken-2">
+
+  <div class="row">
+    <div class="col s4 white">
+      <h3 class="titoli">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore vero labore vitae sed nihil placeat atque pariatur, deleniti nobis aspernatur. Cumque perferendis eius illum laborum alias mollitia minus eos optio impedit a totam aut, laboriosam, illo praesentium ex magni molestias.
+      </h3>
+    </div>
+    <div class="col s8 green darken-2">
+      <section class="mine">
+        <!-- <div class="row col s8"> -->
+        <div class="slider">
+          <ul class="slides">
+            <li>
+              <img src="https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&h=350"> <!-- random image -->
+              <div class="caption left-align">
+                <h3>Cattura l'attenzione dei tuoi clienti</h3>
+                <h5 class="light grey-text text-lighten-3">comunica in modo efficace e aumenta il volume di vendita</h5>
+              </div>
+            </li>
+            <li>
+              <!-- <img src="https://images.pexels.com/photos/34950/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350"> <!-- random image -->
+              <img src="https://images.pexels.com/photos/34950/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350"> <!-- random image -->
+              <div class="caption right-align">
+                <h3>Pubblica i tuoi contenuti con la massima semplicità</h3>
+                <h5 class="light grey-text text-lighten-3">...e aggiungi uno slogan accattivante!</h5>
+              </div>
+            </li>
+            <li>
+              <img src="https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&h=350"> <!-- random image -->
+              <div class="caption center-align">
+                <h3>Personalizza l'interfaccia grafica</h3>
+                <h5 class="light grey-text text-lighten-3">...e utilizza gli aggiornamenti automatici per semplificarti la vita</h5>
+              </div>
+            </li>
+            <li>
+              <img src="https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&h=350"> <!-- random image -->
+              <div class="caption center-align">
+                <h3>Gestisci i tuoi contenuti multimediali </h3>
+                <h5 class="light grey-text text-lighten-3">controlla le informazioni in tempo reale</h5>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!-- </div> -->
+
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer class="page-footer teal darken-3">
+  .<div class="">
+<p class="center-align">
+  <span class="flow-text center-align">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque eaque, repellendus unde sit. Atque, vitae, quidem. Nulla provident veniam nesciunt, numquam, ipsa asperiores, assumenda a, deleniti hic doloremque sequi eligendi!
+  </span>
+</p>
+  </div>
+
+  <div class="footer-copyright">
+    <div class="container">
+      © 2018 Copyright hubanero
+      <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+    </div>
+  </div>
+</footer>
+
+</body>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+<script
+src="https://code.jquery.com/jquery-3.3.1.min.js"
+integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous"></script>
+<script type="text/javascript">
+var elem = document.querySelector('.slider');
+var instance = M.Slider.init(elem, {
+  height: 750,
+  duration: 1500,
+  interval: 8000,
+  indicators: false
+});
+
+
+</script>
+</html>
