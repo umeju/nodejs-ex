@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Include meta tag to ensure proper rendering and touch zooming -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style type="text/css">
+          #remote-header {
+                width: 100%;
+                height: auto;
+            }
+          #remote-header img{
+                display: block;
+                margin: 0 auto;
+                width: 100%;
+            }
+            h3, .text-center{
+                text-align: center;
+            }
+            .maiuscolo {
+                text-transform: uppercase;
+            }
+            
+        </style>
+        <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    </head>
+    <body>
+        <div id="home" data-role="page">
+            <div data-role="header" data-position="fixed">
+                <div class="center-wrapper">
+                    <p style="text-align:center;">
+                        <img width="160" height="45" alt="Header" 
+                         src="http://www.hubanero.it/ugentocasa.jpg" />
+                    </p>
+                    
+                </div>
+<!--                <p class="text-center">Ugento Casa</p>-->
+                <!--<p class="text-center">Immobili e Futuro</p>-->
+                
+            </div>
+            <p></p>
+            
+            <div id="remote-header">
+                <!--img src="" /-->
+            </div>
+            <p></p>
+
+            <h3 class="maiuscolo"> 
+                interagisci 
+                <br/>con il 
+                <br/> maxi-schermo
+            </h3>
+            
+            <div role="main" class="ui-content">
+                <div class="ui-grid-b" style="height:95px">
+                    <div class="ui-icon-arrow-l ui-block-a left" style="height:100%">
+                        <a class="ui-btn">casa -</a>
+                    </div>
+                    <div class="ui-btn ui-icon-search  ui-block-b zoom" style="height:100%">
+                        <a class="ui-btn">zoom</a>
+                    </div>
+                    <div class="ui-icon-arrow-r ui-block-c right" style="height:100%">
+                        <a class="ui-btn">casa +</a>
+                    </div>
+                </div>
+                <a id="tab3" class="ui-icon-delete ui-btn"> aggiorna </a>
+            </div>
+
+            <select name="select-native-1" id="selectlist" class="selectlist">
+                <option value="1#" class="class-option-1"> Seleziona città</option>
+            </select>
+
+            <h4 class="maiuscolo text-center"> scopri le nostre proposte! </h4>
+
+            <div data-role="footer" data-position="fixed">
+                <h3>Spicy Technologies</h3>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            $(function () {
+                   var indirizzi = {
+                       acquarica : 'http://www.ugentocasa.it/lista/index/vendita/1/6/json/',
+                       alliste : 'http://www.ugentocasa.it/lista/index/vendita/1/13/json/',
+                       casarano : 'http://www.ugentocasa.it/lista/index/vendita/1/5/json/',
+                       salve : 'http://www.ugentocasa.it/lista/index/vendita/1/2/json/',
+                       taurisano : 'http://www.ugentocasa.it/lista/index/vendita/1/3/json/',
+                       ugento : 'http://www.ugentocasa.it/lista/index/vendita/1/1/json/',
+                        /*presicce : 'http://www.ugentocasa.it/lista/index/vendita/1/4/json/',
+                        
+                        
+                        ruffano : 'http://www.ugentocasa.it/lista/index/vendita/1/7/json/',
+                        supersano : 'http://www.ugentocasa.it/lista/index/vendita/1/8/json/',
+                        racale : 'http://www.ugentocasa.it/lista/index/vendita/1/9/json/',
+                        morciano : 'http://www.ugentocasa.it/lista/index/vendita/1/10/json/',
+                        patu : 'http://www.ugentocasa.it/lista/index/vendita/1/11json/',
+                        taviano : 'http://www.ugentocasa.it/lista/index/vendita/1/12/json/',
+                        
+                        gallipoli : 'http://www.ugentocasa.it/lista/index/vendita/1/14/json/',
+                        ruggiano : 'http://www.ugentocasa.it/lista/index/vendita/1/15/json/' */
+
+                //        taurisano : 'http://www.ugentocasa.it/lista/index/vendita/1/3/json/',
+                    };
+    
+                    /* get params form url in html page */
+                var QueryString = function () {
+                    /* This function is anonymous, is executed immediately and 
+                     the return value is assigned to QueryString!
+                     */
+                    var query_string = {};
+                    var query = window.location.search.substring(1);
+                    var vars = query.split("&");
+                    for (var i = 0; i < vars.length; i++) {
+                        var pair = vars[i].split("=");
+                        // If first entry with this name
+                        if (typeof query_string[pair[0]] === "undefined") {
+                            query_string[pair[0]] = decodeURIComponent(pair[1]);
+                            // If second entry with this name
+                        } else if (typeof query_string[pair[0]] === "string") {
+                            var arr = [query_string[pair[0]], decodeURIComponent(pair[1])];
+                            query_string[pair[0]] = arr;
+                            // If third or later entry with this name
+                        } else {
+                            query_string[pair[0]].push(decodeURIComponent(pair[1]));
+                        }
+                    }
+                    return query_string;
+                }(); //alert(QueryString.ID + "asd");
+                //get userid val from last div in the html page
+        //                var userID = QueryString.ID;//$('#userID').text();
+                var ID = QueryString.ID;//$('#userID').text();
+        //                var ID = '00020';
+
+                $(".right").click(function () {
+                    $.get("/action/right/"+ ID, {});
+                });
+
+                $(".left").click(function () {
+                    $.get("/action/left/"+ ID, {});
+                });
+
+                $(".zoom").click(function () {
+                    $.get("/action/zoom/"+ ID, {});
+                });
+
+                $('#tab3').click(function () {
+                    $('#tab3').addClass('hidden');
+//                    $.get("/action/zoomOut/" + ID, {});
+                    $.get("/action/refresh2/" + ID, {});
+                });
+                /* code to get params form url in html page */
+                var QueryString = function () {
+                    /* This function is anonymous, is executed immediately and 
+                     the return value is assigned to QueryString!
+                     */
+                    var query_string = {};
+                    var query = window.location.search.substring(1);
+                    var vars = query.split("&");
+                    for (var i = 0; i < vars.length; i++) {
+                        var pair = vars[i].split("=");
+                        // If first entry with this name
+                        if (typeof query_string[pair[0]] === "undefined") {
+                            query_string[pair[0]] = decodeURIComponent(pair[1]);
+                            // If second entry with this name
+                        } else if (typeof query_string[pair[0]] === "string") {
+                            var arr = [query_string[pair[0]], decodeURIComponent(pair[1])];
+                            query_string[pair[0]] = arr;
+                            // If third or later entry with this name
+                        } else {
+                            query_string[pair[0]].push(decodeURIComponent(pair[1]));
+                        }
+                    }
+                    return query_string;
+                }();
+                // get id from URL
+                var userID = QueryString.ID;
+                
+        if(!userID && userID !== '0' && userID != "null"){
+            var yes = confirm("Vuoi prendere il controllo del monitor interattivo hubanero?");
+            if(yes){
+                var randomN = prompt("INSERISCI IL CODICE CHE VEDI SUL MONITOR INTERATTIVO");
+                alert('Fantastico! Se il codice inserito è \
+                        corretto potrai usare il tuo smartphone come un telecomando.\
+                        Pronto per iniziare?');
+                window.location.href = "nuovafarmaciacasarano_remote.html?ID="+randomN;
+            }
+        }
+//            $('#selectlist').each(function (){
+            $.each(indirizzi, function (index, value){
+                console.log(index +":"+ value);
+                $('#selectlist').append("<option value='"+value+"'>"+index+"</option>");
+            });
+            
+            $("select").change(function () {
+                var str = "";
+                $("select option:selected").each(function () {
+                    str += $(this).text() + " ";
+                });
+//                $("select option:selected").val()
+                console.log($("select option:selected").text());
+                
+                var selectedCity = $("select option:selected").text();
+                
+                $.get("/action/find/" + ID, {"city" : selectedCity});
+            });
+
+    });
+        </script>
+
+    </body>
+
+</html>
