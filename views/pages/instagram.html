@@ -75,25 +75,34 @@ iframe {
                 
                 <ul class="allImages">
 
-                    {{#hashtag.edge_hashtag_to_top_posts.edges}}
+                    {{#hashtag.edge_hashtag_to_media.edges}}
                         {{#with node}}
                             {{#if @first}}
                                 <li class="zxc show">
-                                    <img class="image" data-src="{{display_url}}" 
-                                            src="{{display_url}}" />
-                                    <p class='caption'>{{edge_media_to_caption.edges.[0].node.text}}</p>
+                                    <img class="image" data-src="{{display_url}}" src="{{display_url}}" />
+                                    
+                                    <p class='caption'>
+                                        {{#replace "#_farmaciamanfreda_" ''}}
+                                            {{edge_media_to_caption.edges.[0].node.text}}
+                                        {{/replace}}
+                                    </p>
                                 </li>
                                 
                             {{else}}
                                 <li class="zxc">
-                                    <img class="image" data-src="{{display_url}}" 
-                                            src="#" />
-                                    <p class='caption'>{{edge_media_to_caption.edges.[0].node.text}}</p>
+                                    <img class="image" data-src="{{display_url}}" src="#" />
+                                    
+                                    <p class='caption'>
+                                        {{#replace "#_farmaciamanfreda_" '<br />'}}
+                                            {{edge_media_to_caption.edges.[0].node.text}}
+                                        {{/replace}}
+                                    </p>
+                            
                                 </li>
                                 
                             {{/if}}
                         {{/with}}
-                    {{/hashtag.edge_hashtag_to_top_posts.edges}}
+                    {{/hashtag.edge_hashtag_to_media.edges}}
 
                         {{#hashtag.edge_hashtag_to_media.edges}}
 
@@ -166,7 +175,7 @@ var ch = QueryString.ch;
     var cdr;
 //    var serviziSliderOn = false;
 //    var _timeServizi = 6100;
-var _timeout = 10 * 1000;
+var _timeout = 8 * 1000;
 //    var _speed = 3000;
 var startMySlide;
 var theTemplateScript = $("#example-template").html();
@@ -329,6 +338,13 @@ Handlebars.registerHelper('eachProperty', function(context, options)
     }
     return ret;
 });
+
+Handlebars.registerHelper('replace', function( find, replace, options) {
+    var string = options.fn(this);
+return string.replace( find, replace );
+});
+
+
 </script>
 </body>
 </html>
