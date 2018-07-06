@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Sticky Footer Navbar Template for Bootstrap</title>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
+      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<style>
+    /* Sticky footer styles
+-------------------------------------------------- */
+    * {
+/*        border: 1px solid red;*/
+    }
+    html {
+  position: relative;
+  min-height: 100%;
+  overflow: hidden;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+  overflow: hidden;
+  
+  /*background-image: url('https://avante.biz/wp-content/uploads/Clean-Wallpapers-HD/Clean-Wallpapers-HD-003.jpg');*/
+  background-image: url('https://hipertextual.com/files/2017/03/color-degradado-fondos-degradados-multicolor-51200-670x410.jpg');
+    background-size: cover;
+    background-position: 0px -137px;
+    background-repeat: no-repeat;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 112px;
+  background-color: #f5f5f5;
+}
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+  padding: 60px 15px 0;
+}
+.container .text-muted {
+  margin: 20px 0;
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 100%;
+}
+
+code {
+  font-size: 80%;
+}
+iframe {
+    width: 100%;
+    height: 111px;
+    margin: -44px 0 0 0;
+    z-index: 1;
+}
+#spinelli{
+    position: relative;
+    top: 55px;
+}
+.h86{
+    height: 100vh;
+}
+.logo{
+    float: left;
+    width: 80px;
+    margin-right: -1px;
+    top: -20px;
+    position: relative;
+}
+.border{
+    border: 1px solid red;
+}
+.news {
+    padding: 25px;
+    /*color: white;*/
+    font-size: 1rem;
+    font-weight: 500
+}
+
+#nextFoto{
+    z-index: 555;
+    width: 5px;
+    height: 5px;
+    position: absolute;
+    top: 87px;
+    right: 86px;
+    background-color: white;
+}
+#prevFoto{
+    z-index: 555;
+    width: 5px;
+    height: 5px;
+    position: absolute;
+    top: 87px;
+    right: 186px;
+    background-color: blue;
+}
+h1{
+    font-size: 3.5vw !important;
+    text-transform: uppercase;
+}
+h2{
+    font-size: 3vw !important;
+}
+h3{
+    font-size: 2vw !important;
+}
+h4{
+    font-size: 1vw !important;
+}
+p{
+    font-size: 2vw !important;
+}
+.descrizione img{
+    border: 2px solid aquamarine;
+    margin-right: 20px;
+    margin-left: 20px;
+    padding: 17px;
+}
+.main-name{
+    text-transform: capitalize;
+    font-size: 1.4em;
+    padding-left: 10px;
+    font-weight: 600;
+    font-family: fantasy;
+}
+#arrow_l{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-image: url(/common/img/arrow_left.png);
+    top: 0;
+    right: 0;
+    z-index: 0;
+    border: 1px solid red;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+#arrow_r{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-image: url(/common/img/arrow_right.png);
+    top: 0;
+    right: 0;
+    z-index: 0;
+    border: 1px solid red;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+</style>
+  </head>
+
+  <body class="h86">
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" 
+                  data-toggle="collapse" data-target="#navbar" aria-expanded="false" 
+                  aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">
+              <img src="http://familydentalcare.co.za/wp-content/uploads/bfi_thumb/favicon-mfxrd9vtkdpg6x5sbtyhigc3095ln8kxm2gjdnayts.png" class="logo" /> 
+              <span class="main-name"> Studio Dentistico Dott. Geremia Ferri</span>
+          </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+<!--          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Spinelli Caffè</a></li>
+          </ul>-->
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    
+    
+    <!--start #example-template-->
+<script id="example-template" type="text/x-handlebars-template">
+    <div  id="spinelli" class="row h86">
+    {{#posts}}
+        <div class="col-md-12 news {{#if @first}}show{{else}} {{/if}}">
+            <div class="col-md-12 h86">
+                <div class="titolo text-center">
+                    <h1>{{title}} <span class="id-articolo">{{!id}}</span></h1>
+                </div>
+        
+                <div class="descrizione">
+                    <h2>{{{description}}}</h2>
+                </div>
+        
+                <div class="note">
+                    <h3>{{{note}}}</h3>
+                    <h3>{{{note2}}}</h3>
+                </div>
+        
+        </div>
+        <div class="col-md-5"></div>
+    </div>
+    {{/posts}}
+    </div>
+</script>
+
+<div class='content-placeholder'></div>
+        
+<span id="nextFoto" class="next"></span>
+<span id="prevFoto" class="prev"></span>
+
+    <footer class="footer">
+      <div class="container">
+        <!--<p class="text-muted">-->
+            <iframe frameborder="0" scrolling="no" class="" src="http://www.di-vision.org/news/"></iframe>
+        <!--</p>-->
+      </div>
+    </footer>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js">
+</script>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
+</script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
+    crossorigin="anonymous"></script>
+<script src="/socket.io/socket.io.js">
+</script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
+    crossorigin="anonymous"></script>
+    
+    
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
+<script>
+    var QueryString = function (){
+    /* This function is anonymous, is executed immediately and 
+     the return value is assigned to QueryString!
+     */
+    var query_string = {};
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        // If first entry with this name
+        if (typeof query_string[pair[0]] === "undefined") {
+            query_string[pair[0]] = decodeURIComponent(pair[1]);
+            // If second entry with this name
+        } else if (typeof query_string[pair[0]] === "string") {
+            var arr = [query_string[pair[0]], decodeURIComponent(pair[1])];
+            query_string[pair[0]] = arr;
+            // If third or later entry with this name
+        } else {
+            query_string[pair[0]].push(decodeURIComponent(pair[1]));
+        }
+    }
+    return query_string;
+}();
+
+var userID = QueryString.ID;
+
+function jsonCallback(data){
+    console.log("console.log()");
+    goCompile(data);
+/*        $.each(data.sites, function (key, val) {
+//            console.log(data); get entire sites: <array>
+//            if (val.titolo !== '') {
+//                // avoid empty news
+//            }
+        });*/
+    return;
+};    
+function getNews(urlJson){
+    $('<div></div>').attr('id','spinner')
+                    .appendTo('body');
+    $.ajax({
+        type: 'GET',
+        url: urlJson,
+        crossDomain: true,
+        jsonp: false,
+        cache: true,
+        jsonpCallback: 'jsonCallback',
+        dataType: 'jsonp',
+        success: function (json) { console.log('success!'); },
+        error: function (e) { console.log(e.message); },
+        complete: function (jqXHR, textStatus ) { 
+            $("#spinner").remove();
+            slideShow();
+        }
+    });
+};
+
+    
+function goCompile(returnData) {
+//            $.getJSON(returnedData, function (data){
+    var theCompiledHtml = theTemplate(returnData);
+    $('.content-placeholder').html(theCompiledHtml);
+}
+
+(function (exports) { //        var socket = io.connect(socketURI);
+    var socket = io();
+    socket.on('connection', function (data) {
+        console.log('socket connection on');
+    });
+
+    socket.on(userID + '-left', function (data) {
+        console.log(userID + ' left connect!');
+//        $(".prev").trigger('click');
+        $('<div></div>').attr('id','arrow_l')
+                .appendTo('body').fadeOut();
+        Slide(false);
+    });
+
+    socket.on(userID + '-right', function (data) {
+        console.log(userID + ' right connect!');
+        $('<div></div>').attr('id','arrow_r')
+                .appendTo('body').fadeOut();
+        Slide(true);
+    });
+
+    socket.on(userID + '-refresh2', function (data) {
+        console.log('refresh2');
+        location.reload();
+    });
+    //zoom *****
+    socket.on(userID + '-zoom', function (data) {
+    });
+    
+    socket.on(userID + '-find', function (data) {
+        
+    });
+    exports.socket = socket;
+})(window);
+
+var theTemplateScript = $("#example-template").html();
+var theTemplate = Handlebars.compile(theTemplateScript);
+// limit an array to a maximum of elements (from the start)
+Handlebars.registerHelper('limit', function (arr, limit) {
+// remove this line if you don't want the lodash/underscore dependency
+//  if (!_.isArray(arr)) { return []; }
+    return arr.slice(0, limit);
+});
+
+Handlebars.registerHelper('log', function (sth) {
+    console.log(sth)
+});
+
+Handlebars.registerHelper('eachProperty', function(context, options) {
+    var ret = "";
+    for(var prop in context) {
+        ret = ret + options.fn({property:prop,value:context[prop]});
+    }
+    return ret;
+});
+
+$(function(){
+    $('.next,.prev').click(function(ev){
+        boolean = true;
+        console.log(userID + event.target.id + ' left connect!');
+//        $(this).addClass('test');
+        event.target.id == "nextFoto" ?  boolean = true : boolean = false;
+        Slide(boolean);
+    });
+//    returnData = getNews('http://www.hubanero.it/digitalmenu/backend/public/getmenu/1/1/');
+    returnData = getNews('http://www.erboristeria-per-dimagrire.com/post/getjson/happy0');
+    
+});
+
+</script>
+<script>
+function slideShow(){
+//    var counter = 0;
+    news = $('.news');
+    newsCorrente = $('.show');
+//    numSlides = news.length;
+//    newsCorrente = news.eq(counter);
+//    console.log('--'); console.log($numSlides);
+    news.hide();
+    newsCorrente.addClass('show');
+    newsCorrente.css('display','inline-block');
+//    $('.notizia:visible').find("[style:'display=inline-block']");
+    var next = newsCorrente.next().length ? newsCorrente.next() : newsCorrente.parent().children(':first');
+    newsCorrente.hide();
+    newsCorrente.removeClass('show');
+    next.fadeIn().addClass('show');
+    
+     setInterval(function () {
+         Slide();
+     }, 26 * 1000);
+}
+
+function Slide(nextOrPrev){
+    news = $('.news');
+    newsCorrente = $('.show');
+    news.hide();
+    newsCorrente.addClass('show');
+    newsCorrente.css('display','inline-block');
+    if(nextOrPrev == true){
+        var next = newsCorrente.next().length ? newsCorrente.next() : newsCorrente.parent().children(':first');
+    }else{
+        var next = newsCorrente.prev().length ? newsCorrente.prev() : newsCorrente.parent().children(':last');
+    }
+    
+    newsCorrente.hide();
+    newsCorrente.removeClass('show');
+    next.fadeIn().addClass('show');
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/buzz/1.2.1/buzz.min.js"></script>
+
+<script>
+    var mySound = new buzz.sound("/sounds/mysound", {
+    formats: [ "ogg", "mp3", "aac", "wav" ]
+});
+</script>
+</body>
+</html>
