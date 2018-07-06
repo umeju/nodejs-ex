@@ -235,9 +235,9 @@ function slideShow(){
     newsCorrente.removeClass('show');
     next.fadeIn().addClass('show');
     
-     setTimeout(function () {
+     setInterval(function () {
          Slide();
-     }, 3 * 1000);
+     }, 30 * 1000);
 }
 
 function Slide(nextOrPrev){
