@@ -206,8 +206,6 @@ function getNews(urlJson)
         complete: function (jqXHR, textStatus ) {}
     });
 };
-// limit an array to a maximum of elements (from the start)
-
 function goCompile(returnData)
 {
     var theCompiledHtml = theTemplate(returnData);
@@ -236,11 +234,6 @@ function slideShow(resetTimeout, direction)
     next.find('img').attr('src', next.find('img').data('src'));
     startMySlide = setTimeout(slideShow, _timeout);
 }
-
-
-
-
-
 (function (exports) {
         var socket = io();
         socket.on('connection', function (data)
@@ -302,7 +295,6 @@ function slideShow(resetTimeout, direction)
         
         exports.socket = socket;
     })(window);
-
 $(function(){
     returnData = '';
     that = this;
@@ -323,7 +315,7 @@ $(function(){
 //    returnData = getNews('https://api.instagram.com/v1/tags/coffee/media/recent?access_token=ACCESS-TOKEN&callback=jsonCallback');
 
 });
-
+// limit an array to a maximum of elements (from the start)
 Handlebars.registerHelper('limit', function (arr, limit)
 {
 // remove this line if you don't want the lodash/underscore dependency

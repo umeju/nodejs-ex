@@ -34,7 +34,8 @@ body {
   margin-bottom: 60px;
   overflow: hidden;
   
-  background-image: url('https://i.pinimg.com/originals/e8/07/57/e807579edb93300913645941f251c97d.jpg');
+  /*background-image: url('https://i.pinimg.com/originals/e8/07/57/e807579edb93300913645941f251c97d.jpg');*/
+  background-image: url('https://www.lacasarana.it/wp-content/uploads/2018/05/back1.jpg');
     background-size: cover;
     background-position: 0px -137px;
     background-repeat: no-repeat;
@@ -76,45 +77,80 @@ iframe {
 }
 #spinelli{
     position: relative;
-    top: 55px;
+    /*top: 55px;*/
+    top: -18px;
 }
 .h86{
-    height: 86vh;
+    height: 100vh;
 }
 .logo{
     float: left;
     width: 150px;
     margin-right: 23px;
-    top: -10px;
+    top: -73px;
     position: relative;
 }
 .border{
     border: 1px solid red;
 }
 .news {
-    padding: 25px;
+    padding: 0px;
     color: white;
     font-size: 1rem;
-    font-weight: 500
+    font-weight: 500;
+    /*padding-top: 128px;*/
+    padding-top: 68px;
 }
 
 #nextFoto{
     z-index: 555;
-    width: 5px;
-    height: 5px;
+    width: 10px;
+    height: 8px;
     position: absolute;
-    top: 87px;
+    top: 187px;
     right: 86px;
     background-color: white;
 }
 #prevFoto{
     z-index: 555;
-    width: 5px;
-    height: 5px;
+    width: 10px;
+    height: 8px;
     position: absolute;
-    top: 87px;
+    top: 187px;
     right: 186px;
     background-color: red;
+}
+.zeta{
+    vertical-align: middle;
+    width: 100%;
+    /*height: auto;*/
+    height: 103vh;
+    /*max-height: 733px;*/
+}
+.titolo{
+    position: absolute;
+    top: 86px;
+    right: 0px;
+    width: 30%;
+}
+.titolo > h1 {
+        font-size: 14rem;
+    color: brown;
+    font-weight: 600;
+}
+#successivo{
+    height: 100%;
+    width: 100%;
+    background: transparent url("http://www.di-vision.org/cdn/images/dx.png") no-repeat bottom right;
+    position: absolute;
+    top: 0;
+}
+#precedente{
+    height: 100%;
+    width: 100%;
+    background: transparent url("http://www.di-vision.org/cdn/images/sx.png") no-repeat bottom left;
+    position: absolute;
+    top: 0;
 }
 </style>
 </head>
@@ -133,8 +169,9 @@ iframe {
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="#">
-              <img src="https://www.newbasketbrindisi.it/nbb/portale/images/4377.jpg" class="logo" /> 
-              Spinelli Caffè - Gallipoli
+              <img src="https://www.agenziapugliapromozione.it/portal/documents/ddl/1531958/fileFoto1" 
+                   class="logo" /> 
+              La Casarana Resort - Lido Marini
           </a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
@@ -145,25 +182,31 @@ iframe {
       </div>
     </nav>
     
-    
     <!--start #example-template-->
 <script id="example-template" type="text/x-handlebars-template">
     <div  id="spinelli" class="row h86">
     {{#sites}}
-<div class="col-md-12 news {{#if @first}}show{{else}} {{/if}}">
-        <div class="col-md-7 h86 border">
-            <div class="titolo text-center">
-                <h1>{{titolo}} <span class="id-articolo">{{!id}}</span></h1>
-            </div>
-            <div class="descrizione">
-                <h2>{{{descrizione}}}</h2>
-            </div>
-            <div class="note">
-                <h3>{{{note}}}</h3>
-            </div>
-        </div>
-        <div class="col-md-5"></div>
-</div>
+    
+                        
+            {{#each this}}
+                <div class="col-md-12 news {{#if @first}}show{{else}} {{/if}}">
+
+                            <div class="titolo">
+                                <h1>{{@key}}
+                                    <span class="id-articolo">{{! @key}}</span>
+                                </h1>
+                            </div>
+
+                                <div data-key="{{@key}}">
+
+                                    <img class="zeta" data-src="http://www.zetacode.it/upload/uploads/{{this}}" 
+                                            src="http://www.zetacode.it/upload/uploads/{{this}}" />
+                                </div>
+
+                        <div class="col-md-5"></div>
+                </div>
+            {{/each}}
+
     {{/sites}}
     </div>
 </script>
@@ -192,7 +235,7 @@ iframe {
     <footer class="footer">
       <div class="container">
         <!--<p class="text-muted">-->
-            <iframe frameborder="0" scrolling="no" class="" src="http://www.di-vision.org/news/"></iframe>
+            <!--<iframe frameborder="0" scrolling="no" class="" src="http://www.di-vision.org/news/"></iframe>-->
         <!--</p>-->
       </div>
     </footer>
@@ -274,7 +317,6 @@ function getNews(urlJson){
         }
     });
 };
-
     
 function goCompile(returnData) {
 //            $.getJSON(returnedData, function (data){
@@ -322,8 +364,7 @@ $(function(){
         Slide(boolean);
     });
 //    returnData = getNews('http://www.hubanero.it/digitalmenu/backend/public/getmenu/1/1/');
-//    returnData = getNews('http://192.168.1.109/data.json');
-    returnData = getNews('http://www.di-vision.org/spinelli.json');
+    returnData = getNews('http://www.zetacode.it/upload/getimage.php');
 //        
 //    returnData = $.getJSON("http://192.168.1.109/data.json", function(data){
 //        console.log(data);
@@ -350,7 +391,6 @@ Handlebars.registerHelper('eachProperty', function(context, options) {
     return ret;
 });
     
-    
 </script>
 <script>
 function slideShow(){
@@ -371,7 +411,7 @@ function slideShow(){
     
      setInterval(function () {
          Slide();
-     }, 30 * 1000);
+     }, 5 * 1000);
 }
 
 function Slide(nextOrPrev){
@@ -381,15 +421,33 @@ function Slide(nextOrPrev){
     newsCorrente.addClass('show');
     newsCorrente.css('display','inline-block');
     if(nextOrPrev == true){
+        
         var next = newsCorrente.next().length ? newsCorrente.next() : newsCorrente.parent().children(':first');
+        $('<div></div>')
+                .attr('id','successivo')
+                .css('zIndex','100')
+                .appendTo('body')
+                .delay('1000')
+                .fadeOut("fast", function(){
+                    this.remove()
+                });
     }else{
         var next = newsCorrente.prev().length ? newsCorrente.prev() : newsCorrente.parent().children(':last');
+        $('<div></div>')
+                .attr('id','precedente')
+                .css('zIndex','100')
+                .appendTo('body')
+                .delay('1000')
+                .fadeOut("fast", function(){
+                    this.remove()
+                });
     }
     
     newsCorrente.hide();
     newsCorrente.removeClass('show');
     next.fadeIn().addClass('show');
-}   
+}
+
 </script>
   </body>
 </html>
