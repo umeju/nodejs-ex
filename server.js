@@ -178,13 +178,13 @@ app.get('/remotes/:user/:ID', function (req, res) {
     aaa = req.params.ID;
     console.log('/remotes/:'+user+'/:'+aaa);
     
-    switch (user)
+    switch (aaa)
         {
-           case "ugentocasa":
+           case "00021":
                res.render('remote_ugentocasa.html', {aaa: aaa, user: user});
                break;
-           case "happydental":
-               res.render('control.html', {aaa: aaa, user: user});
+           case "10101":
+               res.render('control.html', {aaa: aaa, user: "happydental"});
                break;
 
            default: 
