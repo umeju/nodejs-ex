@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Include meta tag to ensure proper rendering and touch zooming -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>hubanero Remote Control</title>
+<style type="text/css">
+  #remote-header {
+        width: 100%;
+        height: auto;
+    }
+  #remote-header img{
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+    }
+    h3, .text-center{
+        text-align: center;
+    }
+    .maiuscolo {
+        text-transform: uppercase;
+    }
+
+</style>
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+<div id="home" data-role="page">
+    <div data-role="header" data-position="fixed">
+        <div class="center-wrapper">
+            <p style="text-align:center;">
+                <img width="160" height="45" alt="Header" 
+                 src="../../common/img/remote3.png" />
+            </p>
+        </div>
+    </div>
+    <div id="remote-header"> <!--img src="" /--> </div>
+    <h3 class="maiuscolo"> 
+        usa i tasti 
+        <br/>del telecomando 
+        <br/>per interagire
+        <br/>con il display
+    </h3>
+    <div role="main" class="ui-content">
+        <div class="ui-grid-b" style="height:95px">
+            <div class="ui-icon-arrow-l ui-block-a left" style="height:100%">
+                <a class="ui-btn">foto -</a>
+            </div>
+            <div class="ui-btn ui-icon-search  ui-block-b zoom" style="height:100%">
+                <a class="ui-btn">web</a>
+            </div>
+            <div class="ui-icon-arrow-r ui-block-c right" style="height:100%">
+                <a class="ui-btn">foto +</a>
+            </div>
+        </div>
+        <a id="tab3" class="ui-icon-delete ui-btn"> aggiorna pagina </a>
+    </div>
+
+    <div data-role="footer" data-position="fixed">
+        <h3>Spicy Technologies</h3>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+     
+    $(".right").click(function () { $.get("/action/right/<%= aaa %>", {}); });
+    $(".left").click(function () { $.get("/action/left/<%= aaa %>", {}); });
+//    $(".zoom").click(function () { $.get("/action/zoom/<%= aaa %>", {}); });
+    $(".zoom").click(function () {
+        var win = window.open('http://www.hubanero.it', '_blank');
+        if (win) {
+            //Browser has allowed it to be opened
+            win.focus();
+        } else {
+            //Browser has blocked it
+            alert('Please allow popups for this website');
+        }
+    });
+    
+        $('#tab3').click(function () { $('#tab3').addClass('hidden');
+    //  $.get("/action/zoomOut/<%= aaa %>", {});
+        $.get("/action/refresh2/<%= aaa %>", {});
+    });
+});
+
+</script>
+</body>
+</html>
