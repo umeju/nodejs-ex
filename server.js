@@ -188,7 +188,7 @@ app.get('/remotes/:user/:ID', function (req, res) {
                break;
 
            default: 
-               res.render('control.html', {aaa: aaa, user: user});
+               res.render('control.html', {aaa: aaa, user: "generic"});
         }
 //    res.render('remote_ugentocasa.html', {aaa: aaa, user: user});
 });
