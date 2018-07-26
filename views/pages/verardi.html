@@ -1,0 +1,295 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="hubanero - Spicy Technologies">
+<meta name="author" content="hubanero Red Savina">
+<title>hubanero - Spicy Technologies</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
+      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<link href="" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" type="text/css" 
+    href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/base/jquery-ui.css">
+<link rel="stylesheet" type="text/css" 
+    href="http://www.di-vision.org/cdn/instagram.css">
+
+</head>
+<body class="full">
+<script id="example-template" type="text/x-handlebars-template">
+<div  id="news-hub">
+    {{#sites}}
+        <div data-id="{{@index}}" class="blocco-news-{{@index}}">
+            <div class="hidden asd1 {{#if @first}}first{{else}} other{{/if}}"></div>
+                
+                <ul class="allImages">
+
+                    {{#hashtag.edge_hashtag_to_media.edges}}
+                        {{#with node}}
+                            {{#if @first}}
+                                <li class="zxc show">
+                                    <img class="image" data-src="{{display_url}}" src="{{display_url}}" />
+                                    
+                                    <p class='caption'>
+                                        {{#replace "#_farmaciamanfreda_" ''}}
+                                            {{edge_media_to_caption.edges.[0].node.text}}
+                                        {{/replace}}
+                                    </p>
+                                </li>
+                                
+                            {{else}}
+                                <li class="zxc">
+                                    <img class="image" data-src="{{display_url}}" src="#" />
+                                    
+                                    <p class='caption'>
+                                        {{#replace "#_farmaciamanfreda_" '<br />'}}
+                                            {{edge_media_to_caption.edges.[0].node.text}}
+                                        {{/replace}}
+                                    </p>
+                            
+                                </li>
+                                
+                            {{/if}}
+                        {{/with}}
+                    {{/hashtag.edge_hashtag_to_media.edges}}
+
+                        {{#hashtag.edge_hashtag_to_media.edges}}
+
+                        {{/hashtag.edge_hashtag_to_media.edges}}
+                </ul>
+
+            </div>
+        </div>
+    {{/sites}}
+</div>
+</script>
+<!--START TEMPLATE TEST-->
+<div class="content-placeholder"></div>
+<!--END TEMPLATE TEST-->
+
+    <footer class="footer">
+        <div class="container">
+        <!--<p class="text-muted">-->
+        <!--<iframe frameborder="0" scrolling="no" class="" src="http://www.di-vision.org/news/"></iframe>-->
+        <iframe frameborder="0" scrolling="no" class="" src="http://www.di-vision.org/news/?news=ULTIMORA"></iframe>
+        <!--</p>-->
+        </div>
+    </footer>
+
+<span id="nextFoto" class="next"></span>
+<span id="prevFoto" class="prev"></span>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js">
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+    integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+    crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
+        crossorigin="anonymous"></script><script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js">
+
+</script>
+<script>
+var QueryString = function (){
+    /* This function is anonymous, is executed immediately and 
+     the return value is assigned to QueryString!
+     */
+    var query_string = {};
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        // If first entry with this name
+        if (typeof query_string[pair[0]] === "undefined") {
+            query_string[pair[0]] = decodeURIComponent(pair[1]);
+            // If second entry with this name
+        } else if (typeof query_string[pair[0]] === "string") {
+            var arr = [query_string[pair[0]], decodeURIComponent(pair[1])];
+            query_string[pair[0]] = arr;
+            // If third or later entry with this name
+        } else {
+            query_string[pair[0]].push(decodeURIComponent(pair[1]));
+        }
+    }
+    return query_string;
+}();
+// get id from URL
+var userID = QueryString.ID;
+//        get info channell
+var ch = QueryString.ch;
+//    _TIME_T0_REFRESH = 10*60*1000;
+//    var time = 12100;
+    var cdr;
+//    var serviziSliderOn = false;
+//    var _timeServizi = 6100;
+var _timeout = 8 * 1000;
+//    var _speed = 3000;
+var startMySlide;
+var theTemplateScript = $("#example-template").html();
+var theTemplate = Handlebars.compile(theTemplateScript);
+
+function jsonCallback(data){};
+function getNews(urlJson)
+{
+    $.ajax({
+        type: 'GET',
+        url: urlJson,
+        crossDomain: true,
+        jsonp: false,
+        cache: true,
+        jsonpCallback: 'jsonCallback',
+        dataType: 'jsonp',
+        success: function (json) {
+            if(json.sites.length !== 0){
+                console.log('get news success!');
+                that.returnData = json;
+                goCompile(that.returnData);
+            }else{
+            }
+        },
+        error: function (e) {
+            console.log(e.message);
+        },
+        complete: function (jqXHR, textStatus ) {}
+    });
+};
+function goCompile(returnData)
+{
+    var theCompiledHtml = theTemplate(returnData);
+    $('.content-placeholder').html(theCompiledHtml);
+
+    slideShow(true);
+}
+function slideShow(resetTimeout, direction)
+{
+    if(resetTimeout){
+        clearTimeout(startMySlide);
+    }
+    $('.zxc').hide();
+    current = $('.zxc.show');
+//        current.fadeIn().delay(speed).die();
+
+    if(direction == "prev"){
+        next = current.next().length ? current.next().fadeIn() : current.parent().children(':first').fadeIn();
+    }else{
+        next = current.prev().length ? current.prev().fadeIn() : current.parent().children(':last').fadeIn();
+    }
+    
+//        current.fadeOut().removeClass('show').removeClass('collapse');
+    current.fadeOut('fast').removeClass('show');
+    next.fadeIn('slow').addClass('show').removeClass('hidden');
+    next.find('img').attr('src', next.find('img').data('src'));
+    startMySlide = setTimeout(slideShow, _timeout);
+}
+(function (exports) {
+        var socket = io();
+        socket.on('connection', function (data)
+        {
+            console.log('socket connection on');
+        });
+        
+        socket.on(userID + '-left', function (data)
+        {
+            console.log(userID + ' left connect!');
+            clearTimeout(cdr);
+//                mostra feedback freccia a sx
+            $('<div></div>')
+                .attr('id','precedente')
+                .css('zIndex','100')
+                .appendTo('body')
+                .delay('1000')
+                .fadeOut("fast", function(){
+                    this.remove()
+                });
+            $(".prev").trigger('click');
+            slideShow(true, "prev")
+        });
+        
+        socket.on(userID + '-right', function (data) {
+            console.log(userID + ' right connect!');
+            clearTimeout(cdr);
+//                mostra feedback freccia a dx
+            $('<div></div>')
+                .attr('id','successivo')
+                .css('zIndex','100')
+                .appendTo('body')
+                .delay('1000')
+                .fadeOut("fast", function(){
+                    this.remove();
+                });
+            $(".next").trigger('click');
+            slideShow(true);
+        });
+        
+        socket.on(userID + '-refresh2', function (data) {
+            console.log('refresh2');
+            location.reload();
+        });
+        //zoom *****
+        socket.on(userID + '-zoom', function (data) {
+//                fermo il conto alla rovescia del refresh pag
+            clearTimeout(cdr);
+            createDivBigImage();
+            countDownReload();
+        });
+                
+        socket.on(userID + '-find', function (data) {
+            console.log(data.city);
+            selectedCity = data.city;
+            console.log(indirizzi[selectedCity]);
+            getNews(indirizzi[selectedCity]);
+        });
+        
+        exports.socket = socket;
+    })(window);
+$(function(){
+    returnData = '';
+    that = this;
+//    returnData = getNews('https://www.instagram.com/explore/tags/hubanero/?__a=1');
+    returnData = getNews('http://hubanerob.ddns.net/verardi.json');
+
+/*
+ * immagine del post:
+ * data.sites.hashtag.edge_hashtag_to_top_posts.edges[0].node.display_url
+ * 
+ * thumnail 480x480
+ * data.sites.hashtag.edge_hashtag_to_media.edges[0].node.thumbnail_resources[3]
+ * data.sites.hashtag.edge_hashtag_to_media.edges[0].node.thumbnail_resources[3].src
+ * 
+ * 
+ * 
+ */
+//    returnData = getNews('https://api.instagram.com/v1/tags/coffee/media/recent?access_token=ACCESS-TOKEN&callback=jsonCallback');
+
+});
+// limit an array to a maximum of elements (from the start)
+Handlebars.registerHelper('limit', function (arr, limit)
+{
+// remove this line if you don't want the lodash/underscore dependency
+//  if (!_.isArray(arr)) { return []; }
+    return arr.slice(0, limit);
+});
+Handlebars.registerHelper('eachProperty', function(context, options)
+{
+    var ret = "";
+    for(var prop in context){
+        ret = ret + options.fn({property:prop,value:context[prop]});
+    }
+    return ret;
+});
+
+Handlebars.registerHelper('replace', function( find, replace, options) {
+    var string = options.fn(this);
+return string.replace( find, replace );
+});
+
+
+</script>
+</body>
+</html>
