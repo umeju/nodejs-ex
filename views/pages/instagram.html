@@ -34,7 +34,7 @@
                                     <img class="image" data-src="{{display_url}}" src="{{display_url}}" />
                                     
                                     <p class='caption'>
-                                        {{#replace "#_farmaciamanfreda_" ''}}
+                                        {{#replace '#_[a-zA-Z]*_' ''}}
                                             {{edge_media_to_caption.edges.[0].node.text}}
                                         {{/replace}}
                                     </p>
@@ -45,7 +45,7 @@
                                     <img class="image" data-src="{{display_url}}" src="#" />
                                     
                                     <p class='caption'>
-                                        {{#replace "#_farmaciamanfreda_" '<br />'}}
+                                        {{#replace '#_[a-zA-Z]*_' '<br />'}}
                                             {{edge_media_to_caption.edges.[0].node.text}}
                                         {{/replace}}
                                     </p>
@@ -121,14 +121,16 @@ var QueryString = function (){
 }();
 // get id from URL
 var userID = QueryString.ID;
+var profile = QueryString.profile;
+
 //        get info channell
 var ch = QueryString.ch;
 //    _TIME_T0_REFRESH = 10*60*1000;
 //    var time = 12100;
-    var cdr;
+var cdr;
 //    var serviziSliderOn = false;
 //    var _timeServizi = 6100;
-var _timeout = 8 * 1000;
+var _timeout = 12 * 1000;
 //    var _speed = 3000;
 var startMySlide;
 var theTemplateScript = $("#example-template").html();
@@ -238,7 +240,7 @@ function slideShow(resetTimeout, direction)
             createDivBigImage();
             countDownReload();
         });
-                
+        
         socket.on(userID + '-find', function (data) {
             console.log(data.city);
             selectedCity = data.city;
@@ -252,8 +254,16 @@ $(function(){
     returnData = '';
     that = this;
 //    returnData = getNews('https://www.instagram.com/explore/tags/hubanero/?__a=1');
-    returnData = getNews('http://hubanerob.ddns.net/instagram.json');
-
+    
+    var sourceData = {
+            manfreda : 'http://hubanerob.ddns.net/instagram.json',
+            spedicato : 'http://hubanerob.ddns.net/spedicato.json',
+            verardi : 'http://hubanerob.ddns.net/verardi.json',
+            spinelli : 'http://hubanerob.ddns.net/spinelli.json'
+        };
+    sd = sourceData[profile];
+    returnData = getNews(sd);
+    
 /*
  * immagine del post:
  * data.sites.hashtag.edge_hashtag_to_top_posts.edges[0].node.display_url
@@ -286,7 +296,7 @@ Handlebars.registerHelper('eachProperty', function(context, options)
 
 Handlebars.registerHelper('replace', function( find, replace, options) {
     var string = options.fn(this);
-return string.replace( find, replace );
+return string.replace( /#_[a-zA-Z]*_/gi, replace );
 });
 
 
