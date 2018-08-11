@@ -319,27 +319,26 @@
                 }, 11 * 1000);
             }
             
-            function slideShow2() {
-        //    var counter = 0;
-                news2 = $('.news2');
-                newsCorrente2 = $('.show2');
-        //    numSlides = news.length;
-        //    newsCorrente = news.eq(counter);
-        //    console.log('--'); console.log($numSlides);
-                news2.hide();
-                newsCorrente2.addClass('show2');
-                newsCorrente2.css('display', 'inline-block');
-        //    $('.notizia:visible').find("[style:'display=inline-block']");
-                var next = newsCorrente2.next().length ? newsCorrente2.next() : newsCorrente2.parent().children(':first');
-                newsCorrente2.hide();
-                newsCorrente2.removeClass('show2');
-                next.fadeIn().addClass('show2');
-
-                setInterval(function () {
-                    Slide2(true);
-                }, 13 * 1000);
-            }
-            
+//            function slideShow2() {
+//        //    var counter = 0;
+//                news2 = $('.news2');
+//                newsCorrente2 = $('.show2');
+//        //    numSlides = news.length;
+//        //    newsCorrente = news.eq(counter);
+//        //    console.log('--'); console.log($numSlides);
+//                news2.hide();
+//                newsCorrente2.addClass('show2');
+//                newsCorrente2.css('display', 'inline-block');
+//        //    $('.notizia:visible').find("[style:'display=inline-block']");
+//                var next = newsCorrente2.next().length ? newsCorrente2.next() : newsCorrente2.parent().children(':first');
+//                newsCorrente2.hide();
+//                newsCorrente2.removeClass('show2');
+//                next.fadeIn().addClass('show2');
+//
+//                setInterval(function () {
+//                    Slide2(true);
+//                }, 13 * 1000);
+//            }            
 
             function Slide(nextOrPrev) {
                 news = $('.news');
@@ -376,40 +375,39 @@
             }
             
             
-            function Slide2(nextOrPrev) {
-                news = $('.news2');
-                newsCorrente = $('.show2');
-                news.hide();
-                newsCorrente.addClass('show2');
-                newsCorrente.css('display', 'inline-block');
-                if (nextOrPrev == true) {
-
-                    var next = newsCorrente.next().length ? newsCorrente.next() : newsCorrente.parent().children(':first');
-                    $('<div></div>')
-                            .attr('id', 'successivo')
-                            .css('zIndex', '100')
-                            .appendTo('body')
-                            .delay('1000')
-                            .fadeOut("fast", function () {
-                                this.remove()
-                            });
-                } else {
-                    var next = newsCorrente.prev().length ? newsCorrente.prev() : newsCorrente.parent().children(':last');
-                    $('<div></div>')
-                            .attr('id', 'precedente')
-                            .css('zIndex', '100')
-                            .appendTo('body')
-                            .delay('1000')
-                            .fadeOut("fast", function () {
-                                this.remove()
-                            });
-                }
-
-                newsCorrente.hide();
-                newsCorrente.removeClass('show2');
-                next.fadeIn().addClass('show2');
-            }
-            
+//            function Slide2(nextOrPrev) {
+//                news = $('.news2');
+//                newsCorrente = $('.show2');
+//                news.hide();
+//                newsCorrente.addClass('show2');
+//                newsCorrente.css('display', 'inline-block');
+//                if (nextOrPrev == true) {
+//
+//                    var next = newsCorrente.next().length ? newsCorrente.next() : newsCorrente.parent().children(':first');
+//                    $('<div></div>')
+//                            .attr('id', 'successivo')
+//                            .css('zIndex', '100')
+//                            .appendTo('body')
+//                            .delay('1000')
+//                            .fadeOut("fast", function () {
+//                                this.remove()
+//                            });
+//                } else {
+//                    var next = newsCorrente.prev().length ? newsCorrente.prev() : newsCorrente.parent().children(':last');
+//                    $('<div></div>')
+//                            .attr('id', 'precedente')
+//                            .css('zIndex', '100')
+//                            .appendTo('body')
+//                            .delay('1000')
+//                            .fadeOut("fast", function () {
+//                                this.remove()
+//                            });
+//                }
+//
+//                newsCorrente.hide();
+//                newsCorrente.removeClass('show2');
+//                next.fadeIn().addClass('show2');
+//            }
             
 
         </script>
