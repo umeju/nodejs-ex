@@ -87,20 +87,7 @@
                                 </div>
                                 
                         </div>
-                        <div class="news2 {{#if @first}}show2{{else}} {{/if}}">
-
-                                <div class="titolo2">
-                                    <h1>{{@key}}
-                                        <span class="id-articolo">{{! @key}}</span>
-                                    </h1>
-                                </div>
-
-                                <div data-key="{{@key}}">
-                                    <img class="zeta" data-src="http://www.zetacode.it/upload/uploads/{{this}}" 
-                                        src="http://www.zetacode.it/upload/uploads/{{this}}" />
-                                </div>
-                                
-                        </div>
+                        
                     {{/each}}
 
             {{/sites}}
@@ -316,7 +303,7 @@
 
                 setInterval(function () {
                     Slide(true);
-                }, 7 * 1000);
+                }, 5 * 1000);
             }
             
 //            function slideShow2() {
