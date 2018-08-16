@@ -17,57 +17,12 @@
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
               integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-        <!--<link rel="stylesheet" href="http://www.di-vision.org/cdn/zetacode.css">-->
-        <style>
-            html,body{
-                width: 100%;
-                height: 100%;
-                overflow: hidden;
-            }
-
-            body{
-                margin-bottom: 0;
-                background-image: url(http://www.di-vision.org/cdn/images/bgx.jpg);
-                background-size: 100% 100%;
-                background-position: 0px 0px;
-                background-repeat: no-repeat;
-            }
-            #bodiv {
-                margin-bottom: 60px;
-                overflow: hidden;
-                background-image: url(http://www.di-vision.org/cdn/images/bgx.jpg);
-                background-size: cover;
-                background-position: 0px -59px;
-                background-repeat: no-repeat;
-            }
-
-            #footer {
-                position:fixed;
-                left:0px;
-                bottom:0px;
-                height:30px;
-                width:100%;
-                background:#999;
-                background-image: url('http://www.di-vision.org/cdn/images/lacasarana-wellness-resort-lidomarini.jpg');
-            }
-            .show{
-                position: relative;
-            }
-            .zeta{
-                width: 800px;
-                height: auto;
-                position: relative;
-                top: 160px;
-                margin: 0 auto;
-                display: block;
-            }
-        </style>
+        <link rel="stylesheet" href="http://www.di-vision.org/cdn/zetacode.css">
+        
     </head>
 
     <body class="h86">
         <div id="bodiv"> </div>
-        
-        
         
         <script id="example-template" type="text/x-handlebars-template">
         <div  id="spinelli" class="row h86">
@@ -75,40 +30,20 @@
                     {{#each this}}
                         <div class="news {{#if @first}}show{{else}} {{/if}}">
 
-                                <div class="titolo">
-                                    <h1>{{@key}}
-                                        <span class="id-articolo">{{! @key}}</span>
-                                    </h1>
-                                </div>
-
-                                <div data-key="{{@key}}">
+                                <div data-key="{{@key}}" class="main-image">
+                                    <div class="chiave">
+                                        <div class="id-foto">{{@key}}
+                                            <div class="id-articolo">{{! @key}}</div>
+                                        </div>
+                                    </div>
                                     <img class="zeta" data-src="http://www.zetacode.it/upload/uploads/{{this}}" 
                                         src="http://www.zetacode.it/upload/uploads/{{this}}" />
                                 </div>
-                                
                         </div>
-                        
                     {{/each}}
-
             {{/sites}}
-    </div>
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        </div>
+        </script>
 
         <div class='content-placeholder'></div>
 
@@ -122,8 +57,6 @@
                 <!--</p>-->
             </div>
         </footer>
-
-
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js">
         </script>
@@ -257,10 +190,6 @@
                 });
         //    returnData = getNews('http://www.hubanero.it/digitalmenu/backend/public/getmenu/1/1/');
                 returnData = getNews('http://www.zetacode.it/upload/getimage.php');
-        //        
-        //    returnData = $.getJSON("http://192.168.1.109/data.json", function(data){
-        //        console.log(data);
-        //    });
 
             });
 
@@ -303,30 +232,9 @@
 
                 setInterval(function () {
                     Slide(true);
-                }, 5 * 1000);
+                }, 500 * 1000);
             }
             
-//            function slideShow2() {
-//        //    var counter = 0;
-//                news2 = $('.news2');
-//                newsCorrente2 = $('.show2');
-//        //    numSlides = news.length;
-//        //    newsCorrente = news.eq(counter);
-//        //    console.log('--'); console.log($numSlides);
-//                news2.hide();
-//                newsCorrente2.addClass('show2');
-//                newsCorrente2.css('display', 'inline-block');
-//        //    $('.notizia:visible').find("[style:'display=inline-block']");
-//                var next = newsCorrente2.next().length ? newsCorrente2.next() : newsCorrente2.parent().children(':first');
-//                newsCorrente2.hide();
-//                newsCorrente2.removeClass('show2');
-//                next.fadeIn().addClass('show2');
-//
-//                setInterval(function () {
-//                    Slide2(true);
-//                }, 13 * 1000);
-//            }            
-
             function Slide(nextOrPrev) {
                 news = $('.news');
                 newsCorrente = $('.show');
@@ -362,44 +270,7 @@
             }
             
             
-//            function Slide2(nextOrPrev) {
-//                news = $('.news2');
-//                newsCorrente = $('.show2');
-//                news.hide();
-//                newsCorrente.addClass('show2');
-//                newsCorrente.css('display', 'inline-block');
-//                if (nextOrPrev == true) {
-//
-//                    var next = newsCorrente.next().length ? newsCorrente.next() : newsCorrente.parent().children(':first');
-//                    $('<div></div>')
-//                            .attr('id', 'successivo')
-//                            .css('zIndex', '100')
-//                            .appendTo('body')
-//                            .delay('1000')
-//                            .fadeOut("fast", function () {
-//                                this.remove()
-//                            });
-//                } else {
-//                    var next = newsCorrente.prev().length ? newsCorrente.prev() : newsCorrente.parent().children(':last');
-//                    $('<div></div>')
-//                            .attr('id', 'precedente')
-//                            .css('zIndex', '100')
-//                            .appendTo('body')
-//                            .delay('1000')
-//                            .fadeOut("fast", function () {
-//                                this.remove()
-//                            });
-//                }
-//
-//                newsCorrente.hide();
-//                newsCorrente.removeClass('show2');
-//                next.fadeIn().addClass('show2');
-//            }
-            
-
         </script>
-
-
 
     </body>
 </html>
