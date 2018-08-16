@@ -20,6 +20,20 @@
     .maiuscolo {
         text-transform: uppercase;
     }
+    .whatsapp-image {
+        width: 36px;
+        padding-right: 5px;
+        display: block;
+        margin: 0 auto;
+    }
+    .wa-class{
+        position: relative;
+        width: 200px;
+        margin: 0 auto;
+        margin-top: 25px;
+        text-align: center;
+    }
+
 
 </style>
 <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
@@ -55,7 +69,8 @@
                 <a class="ui-btn">foto +</a>
             </div>
         </div>
-        <a id="tab3" class="ui-icon-delete ui-btn"> aggiorna pagina </a>
+        <a id="tab3" class="ui-icon-delete ui-btn"> aggiorna pagina</a>
+        
     </div>
 
     <div data-role="footer" data-position="fixed">
@@ -66,6 +81,7 @@
 <script type="text/javascript">
 $(function () {
      
+     var test = "/action/right/<%= aaa %>";
     $(".right").click(function () { $.get("/action/right/<%= aaa %>", {}); });
     $(".left").click(function () { $.get("/action/left/<%= aaa %>", {}); });
 //    $(".zoom").click(function () { $.get("/action/zoom/<%= aaa %>", {}); });
@@ -84,6 +100,24 @@ $(function () {
     //  $.get("/action/zoomOut/<%= aaa %>", {});
         $.get("/action/refresh2/<%= aaa %>", {});
     });
+    
+    var template ='<div class="wa-class">\
+            <span class="bar-contact">\
+                <a href="https://api.whatsapp.com/send?phone=+393468428187&amp;text=Salve%2C%20vorrei%20richiedere%20la%20stampa%20della%20foto%20N%C2%B0%3A%20xx%2C%20xx%2C%20xx..." class="ui-link"> \
+                    <img class="whatsapp-image" alt="24re ristorante leuca prenota via whatsapp" src="http://24releuca.it/capodileuca/whatsapp-logo-ristorante-24RE.png">\
+                    Prenota le tue foto con whatsapp\
+                </a>\
+                <br>\
+<!--                <a href="tel:+39 346 84 28 187">\
+                    <img class="whatsapp-image" alt="La casarana foto via whatsapp" \
+                        src="http://24releuca.it/capodileuca/whatsapp-logo-ristorante-24RE.png">\
+                    Tel: +39 346 84 28 187\
+                </a>-->\
+            </span>\
+        </div>';
+    if("<%= aaa %>"==="10098"){
+        $('.wa-class').append(template);
+    }
 });
 
 </script>
