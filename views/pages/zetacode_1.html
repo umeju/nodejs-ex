@@ -181,10 +181,10 @@
             var theTemplate = Handlebars.compile(theTemplateScript);
 
             $(function () {
-                $('.next,.prev').click(function (ev) {
+                $('.next,.prev').click(function (event) {
                     boolean = true;
         //        $(this).addClass('test');
-                    event.target.id == "nextFoto" ? boolean = true : false;
+                    event.target.id == "nextFoto" ? boolean = true : boolean = false;
                     Slide(boolean);
                 });
         //    returnData = getNews('http://www.hubanero.it/digitalmenu/backend/public/getmenu/1/1/');
