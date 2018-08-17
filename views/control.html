@@ -42,36 +42,27 @@
 </head>
 <body>
 <div id="home" data-role="page">
-    <div data-role="header" data-position="fixed">
-        <div class="center-wrapper">
-            <p style="text-align:center;">
-                <img width="160" height="45" alt="Header" 
-                 src="../../common/img/remote3.png" />
-            </p>
-        </div>
-    </div>
-    <div id="remote-header"> <!--img src="" /--> </div>
-    <h3 class="maiuscolo"> 
-        usa i tasti 
-        <br/>del telecomando 
-        <br/>per interagire
-        <br/>con il display
-    </h3>
+    <% include partials/mheader_control %>
+    
     <div role="main" class="ui-content">
         <div class="ui-grid-b" style="height:95px">
             <div class="ui-icon-arrow-l ui-block-a left" style="height:100%">
-                <a class="ui-btn">foto -</a>
+                <a id="prevFoto" class="ui-btn">foto -</a>
             </div>
             <div class="ui-btn ui-icon-search  ui-block-b zoom" style="height:100%">
                 <a class="ui-btn">web</a>
             </div>
             <div class="ui-icon-arrow-r ui-block-c right" style="height:100%">
-                <a class="ui-btn">foto +</a>
+                <a id="nextFoto" class="ui-btn">foto +</a>
             </div>
         </div>
         <a id="tab3" class="ui-icon-delete ui-btn"> aggiorna pagina</a>
         
-        <div class="wa-class"></div>
+        <div class="wa-class">
+            <% if (aaa==10098) { %>
+                <%    include partials/mwhatsapp %>
+            <% } %>
+        </div>
     </div>
 
     <div data-role="footer" data-position="fixed">
@@ -81,8 +72,6 @@
 
 <script type="text/javascript">
 $(function () {
-     
-     var test = "/action/right/<%= aaa %>";
     $(".right").click(function () { $.get("/action/right/<%= aaa %>", {}); });
     $(".left").click(function () { $.get("/action/left/<%= aaa %>", {}); });
 //    $(".zoom").click(function () { $.get("/action/zoom/<%= aaa %>", {}); });
@@ -101,22 +90,22 @@ $(function () {
     //  $.get("/action/zoomOut/<%= aaa %>", {});
         $.get("/action/refresh2/<%= aaa %>", {});
     });
-    
-    var template ='<span class="bar-contact">\
-                <a href="https://api.whatsapp.com/send?phone=+393468428187&amp;text=Salve%2C%20vorrei%20richiedere%20la%20stampa%20della%20foto%20N%C2%B0%3A%20xx%2C%20xx%2C%20xx..." class="ui-link"> \
-                    <img class="whatsapp-image" alt="24re ristorante leuca prenota via whatsapp" src="http://24releuca.it/capodileuca/whatsapp-logo-ristorante-24RE.png">\
-                    Prenota le tue foto con whatsapp\
-                </a>\
-                <br>\
-<!--                <a href="tel:+39 346 84 28 187">\
-                    <img class="whatsapp-image" alt="La casarana foto via whatsapp" \
-                        src="http://24releuca.it/capodileuca/whatsapp-logo-ristorante-24RE.png">\
-                    Tel: +39 346 84 28 187\
-                </a>-->\
-            </span>';
-    if("<%= aaa %>"==="10098"){
-        $('.wa-class').append(template);
-    }
+//    
+//    var template ='<span class="bar-contact">\
+//                <a href="https://api.whatsapp.com/send?phone=+393468428187&amp;text=Salve%2C%20vorrei%20richiedere%20la%20stampa%20della%20foto%20N%C2%B0%3A%20xx%2C%20xx%2C%20xx..." class="ui-link"> \
+//                    <img class="whatsapp-image" alt="24re ristorante leuca prenota via whatsapp" src="http://24releuca.it/capodileuca/whatsapp-logo-ristorante-24RE.png">\
+//                    Prenota le tue foto con whatsapp\
+//                </a>\
+//                <br>\
+//<!--                <a href="tel:+39 346 84 28 187">\
+//                    <img class="whatsapp-image" alt="La casarana foto via whatsapp" \
+//                        src="http://24releuca.it/capodileuca/whatsapp-logo-ristorante-24RE.png">\
+//                    Tel: +39 346 84 28 187\
+//                </a>-->\
+//            </span>';
+//    if("<%= aaa %>"==="10098"){
+//        $('.wa-class').append(template);
+//    }
 });
 
 </script>
