@@ -93,6 +93,23 @@ function goCompile(returnData) {
 
 var theTemplateScript = $("#example-template").html();
 var theTemplate = Handlebars.compile(theTemplateScript);
+
+$(function(){
+    $('.next,.prev').click(function(ev){
+        boolean = true;
+//        $(this).addClass('test');
+        event.target.id == "nextFoto" ?  boolean = true : false;
+        Slide(boolean);
+    });
+//    returnData = getNews('http://www.hubanero.it/digitalmenu/backend/public/getmenu/1/1/');
+    returnData = getNews('http://192.168.1.109/data.json');
+//        
+//    returnData = $.getJSON("http://192.168.1.109/data.json", function(data){
+//        console.log(data);
+//    });
+    
+});
+
 // limit an array to a maximum of elements (from the start)
 Handlebars.registerHelper('limit', function (arr, limit) {
 // remove this line if you don't want the lodash/underscore dependency
@@ -110,16 +127,4 @@ Handlebars.registerHelper('eachProperty', function(context, options) {
         ret = ret + options.fn({property:prop,value:context[prop]});
     }
     return ret;
-});
-
-$(function(){
-    $('.next,.prev').click(function(ev){
-        boolean = true;
-//        $(this).addClass('test');
-        event.target.id == "nextFoto" ?  boolean = true : false;
-        Slide(boolean);
-    });
-//    returnData = getNews('http://www.hubanero.it/digitalmenu/backend/public/getmenu/1/1/');
-    returnData = getNews('http://localhost:8000/articolo/getjson');
-    
 });
