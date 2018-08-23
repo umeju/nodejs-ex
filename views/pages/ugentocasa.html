@@ -14,6 +14,28 @@
 <link href="http://www.di-vision.org/cdn/ugentocasa.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" type="text/css" 
     href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/base/jquery-ui.css">
+<style>
+/*    .full___{
+        background-color: darkblue;
+    }*/
+    .h1-block{
+        width: 100%;
+        /*border: 1px solid;*/
+        display: block;
+        min-height: 150px;
+    }
+    .apart-title{
+        width: 85%;
+        float: right;
+    }
+    .qrcode{
+        position: absolute;
+        top: 10px;
+    }
+    .bg-primary {
+        height: 100vh !important;
+    }
+</style>
 </head>
 <body class="full">
 <script id="example-template" type="text/x-handlebars-template">
@@ -21,10 +43,18 @@
     {{#sites}}
     <div data-id="{{@index}}" class="flex-row notizia blocco-news-{{@index}}">
         <div class="col-md-12 bg-primary {{#if @first}}mt-0 mr-1{{else}} {{/if}}">
-            <h1 class="display-1">
-                <span class="codice">{{codice}}</span> - {{titolo}} 
-                <br /> <blink class="giada">{{price}} € </blink>
-            </h1> 
+            <div class="h1-block">
+                <div class="apart-title">
+                    <h1 class="display-1">
+                        <span class="codice">{{codice}}</span> - {{titolo}} 
+                        <br /> <blink class="giada">{{price}} € </blink>
+                    </h1>
+                </div>
+                <div class="qrcode">
+                    <img src="https://chart.googleapis.com/chart?cht=qr&chl=http%3A%2F%2Fwww.ugentocasa.it%2Flista%2Findex%2Fall%2F%3Fcodice%3D{{codice}}&chs=150x150&chld=L|0" />
+                </div>
+            </div>
+            
             <h2 class="text-justify display-2">
                 {{{descrizione}}}
             </h2>
@@ -34,9 +64,15 @@
             </h2-->
             
             <p class="imageGroup">
-                <img class="slide" src="{{foto_evidenza.[0]}}" alt="foto agenzia immobilaire ugento casa" data-pin-nopin="true" />
-                <img class="slide" src="{{foto_evidenza.[1]}}" alt="foto agenzia immobilaire ugento casa" data-pin-nopin="true" />
-                <img class="slide" src="{{foto_evidenza.[2]}}" alt="foto agenzia immobilaire ugento casa" data-pin-nopin="true" />
+                <img class="slide" src="http://www.di-vision.org/cdn/images/ugentocasa.jpg" 
+                    data-imgsrc="{{foto_evidenza.[0]}}" alt="foto agenzia immobilaire ugento casa" 
+                    data-pin-nopin="true" />
+                <img class="slide" src="http://www.di-vision.org/cdn/images/ugentocasa.jpg" 
+                    data-imgsrc="{{foto_evidenza.[1]}}" alt="foto agenzia immobilaire ugento casa" 
+                    data-pin-nopin="true" />
+                <img class="slide" src="http://www.di-vision.org/cdn/images/ugentocasa.jpg" 
+                    data-imgsrc="{{foto_evidenza.[2]}}" alt="foto agenzia immobilaire ugento casa" 
+                    data-pin-nopin="true" />
             </p>
             
             <ul class="ul-caratteristiche">
@@ -48,12 +84,14 @@
             <!-- code * -->
             
             <p class="bigImage">
-                <img data-urlimg="{{foto_evidenza.[0]}}" class="darkBg show" src="{{foto_evidenza.[0]}}" />
-                <img data-urlimg="{{foto_evidenza.[1]}}" class="darkBg collapse" src="{{foto_evidenza.[1]}}" />
-                <img data-urlimg="{{foto_evidenza.[2]}}" class="darkBg collapse" src="{{foto_evidenza.[2]}}" />
+                <img data-urlimg="{{foto_evidenza.[0]}}" class="darkBg show" 
+                    src="http://www.di-vision.org/cdn/images/ugentocasa.jpg" />
+                <img data-urlimg="{{foto_evidenza.[1]}}" class="darkBg collapse" 
+                    src="http://www.di-vision.org/cdn/images/ugentocasa.jpg" />
+                <img data-urlimg="{{foto_evidenza.[2]}}" class="darkBg collapse" 
+                    src="http://www.di-vision.org/cdn/images/ugentocasa.jpg" />
             </p>
         </div>
-
     </div>
     {{/sites}}
 </div>
@@ -208,6 +246,7 @@ div class="ul-pics">
 
     _TIME_T0_REFRESH = 10*60*1000;
     var time = 12100;
+    
     var cdr;
     var indirizzi = {
         ugento : 'http://www.ugentocasa.it/lista/index/vendita/1/1/json/',
@@ -325,14 +364,17 @@ div class="ul-pics">
             clearTimeout(startMySlide);
         }
         current = $('.bigImage:visible .show');
-//        current = $('.bigImage:visible .show').not('.collapse');
-//        current3 = $('.bigImage .show').not('.collapse');
-//        current2 = $('.bigImage:visible');
+        currents = $('.imageGroup:visible > img');
+        currents.eq(0).attr('src', currents.eq(0).data("imgsrc"));
+        currents.eq(1).attr('src', currents.eq(1).data("imgsrc"));
+        currents.eq(2).attr('src', currents.eq(2).data("imgsrc"));
         
 //        if(current.length == 0){
         // handler errore scomparsa foto:
         if($('.bigImage img:visible').length == 0){
                 console.log('drama2!');
+                $('.bigImage:visible').find('img').eq(0)
+                        .attr('src',$('.bigImage:visible').find('img').eq(0).data("imgsrc"));
                 $('.bigImage:visible').find('img').eq(0).css("display", "block");
                 $('.bigImage:visible').addClass('show');
                 current = $('.bigImage:visible');
@@ -351,8 +393,16 @@ div class="ul-pics">
         }
 //        current.fadeIn().delay(speed).die();
         next = current.next().length ? current.next().fadeIn() : current.parent().children(':first').fadeIn();
+        next.attr('src', next.data('urlimg'));
+        
         current.fadeOut().removeClass('show').removeClass('collapse');
         next.fadeIn('slow').addClass('show');
+        // set default image...better mem alloc? *********************
+//        current.attr('src', "http://www.di-vision.org/cdn/images/ugentocasa.jpg");
+//        currents.eq(0).attr('src', "http://www.di-vision.org/cdn/images/ugentocasa.jpg");
+//        currents.eq(1).attr('src', "http://www.di-vision.org/cdn/images/ugentocasa.jpg");
+//        currents.eq(2).attr('src', "http://www.di-vision.org/cdn/images/ugentocasa.jpg");
+        
         startMySlide = setTimeout(slideShow, _timeout);
     }
     
