@@ -284,12 +284,15 @@ Handlebars.registerHelper('eachProperty', function(context, options)
     return ret;
 });
 
+//Handlebars.registerHelper('replace', function( find, replace, options) {
+//    var string = options.fn(this);
+//return string.replace( find, replace );
+//});
+
 Handlebars.registerHelper('replace', function( find, replace, options) {
     var string = options.fn(this);
-return string.replace( find, replace );
+return string.replace( /#_[a-zA-Z]*_/gi, replace );
 });
-
-
 </script>
 </body>
 </html>
