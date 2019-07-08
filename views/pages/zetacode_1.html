@@ -23,17 +23,30 @@
             height: 366px;
             display: block;
             margin: 0 auto;
-            border: 1px solid red;
-            background: url('/common/img/arrow_left.png') no-repeat fixed 54px 177px;
-            position: relative;
-            top: 30%;
+            /*border: 1px solid red;*/
+            position: absolute;
+            top: 17%;
+            left: 36%;
+            background: transparent url("http://www.di-vision.org/cdn/images/sx.png") no-repeat bottom right;
+        }
+        #successivo {
+            z-index: 1000;
+            width: 346px;
+            height: 366px;
+            display: block;
+            margin: 0 auto;
+            /*border: 1px solid red;*/
+            position: absolute;
+            top: 17%;
+            left: 36%;
+            background: transparent url("http://www.di-vision.org/cdn/images/dx.png") no-repeat bottom right;
         }
         
     </style>
 </head>
 <body class="h86">
-<% include ../partials/m_id_successivo %>
-<% include ../partials/m_id_precedente %>
+<!--<% include ../partials/m_id_successivo %>
+<% include ../partials/m_id_precedente %>-->
 <div id="bodiv"></div>
 
 <script id="example-template" type="text/x-handlebars-template">
@@ -254,7 +267,7 @@ crossorigin="anonymous"></script>
             var next = newsCorrente.next().length ? newsCorrente.next() : newsCorrente.parent().children(':first');
             $('<div></div>')
                     .attr('id', 'successivo')
-                    .css('zIndex', '100')
+                    .css('zIndex', '1000')
                     .appendTo('body')
                     .delay('1000')
                     .fadeOut("fast", function () {
@@ -264,7 +277,7 @@ crossorigin="anonymous"></script>
             var next = newsCorrente.prev().length ? newsCorrente.prev() : newsCorrente.parent().children(':last');
             $('<div></div>')
                     .attr('id', 'precedente')
-                    .css('zIndex', '100')
+                    .css('zIndex', '1000')
                     .appendTo('body')
                     .delay('1000')
                     .fadeOut("fast", function () {
