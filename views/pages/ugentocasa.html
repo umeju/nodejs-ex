@@ -249,21 +249,36 @@ div class="ul-pics">
     
     var cdr;
     var indirizzi = {
-        ugento : '//www.ugentocasa.it/lista/index/vendita/1/1/json/',
-        salve : '//www.ugentocasa.it/lista/index/vendita/1/2/json/',
-        taurisano : '//www.ugentocasa.it/lista/index/vendita/1/3/json/',
-        presicce : '//www.ugentocasa.it/lista/index/vendita/1/4/json/',
-        casarano : '//www.ugentocasa.it/lista/index/affitto/1/5/json/',
-        acquarica : '//www.ugentocasa.it/lista/index/vendita/1/6/json/',
-        ruffano : '//www.ugentocasa.it/lista/index/vendita/1/7/json/',
-        supersano : '//www.ugentocasa.it/lista/index/vendita/1/8/json/',
-        racale : '//www.ugentocasa.it/lista/index/vendita/1/9/json/',
-        morciano : '//www.ugentocasa.it/lista/index/vendita/1/10/json/',
-        patu : '//www.ugentocasa.it/lista/index/vendita/1/11json/',
-        taviano : '//www.ugentocasa.it/lista/index/vendita/1/12/json/',
-        alliste : '//www.ugentocasa.it/lista/index/vendita/1/13/json/',
-        gallipoli : '//www.ugentocasa.it/lista/index/vendita/1/14/json/',
-        ruggiano : '//www.ugentocasa.it/lista/index/vendita/1/15/json/'
+        //************ugento : '//www.ugentocasa.it/lista/index/vendita/1/1/json/',
+        ugento : '//www.ugentocasa.it/myadm/funzioni/dati_vetrina.php?id_cat=1&id_com=33388',
+        //salve : '//www.ugentocasa.it/lista/index/vendita/1/2/json/',
+        salve : '//www.ugentocasa.it/myadm/funzioni/dati_vetrina.php?id_cat=1&id_com=33860',
+        //taurisano : '//www.ugentocasa.it/lista/index/vendita/1/3/json/',
+        taurisano : '//www.ugentocasa.it/myadm/funzioni/dati_vetrina.php?id_cat=1&id_com=29746 ',
+        //presicce : '//www.ugentocasa.it/lista/index/vendita/1/4/json/',
+        presicce : '//www.ugentocasa.it/myadm/funzioni/dati_vetrina.php?id_cat=1&id_com=77616',
+        //casarano : '//www.ugentocasa.it/lista/index/affitto/1/5/json/',
+        casarano : '//www.ugentocasa.it/myadm/funzioni/dati_vetrina.php?id_cat=1&id_com=33855',
+        //acquarica : '//www.ugentocasa.it/lista/index/vendita/1/6/json/',
+        acquarica : '//www.ugentocasa.it/myadm/funzioni/dati_vetrina.php?id_cat=1&id_com=77287',
+        //ruffano : '//www.ugentocasa.it/lista/index/vendita/1/7/json/',
+        ruffano : '//www.ugentocasa.it/myadm/funzioni/dati_vetrina.php?id_cat=1&id_com=29741',
+        //supersano : '//www.ugentocasa.it/lista/index/vendita/1/8/json/',
+        supersano : '//www.ugentocasa.it/myadm/funzioni/dati_vetrina.php?id_cat=1&id_com=31119',
+        //racale : '//www.ugentocasa.it/lista/index/vendita/1/9/json/',
+        racale : '//www.ugentocasa.it/myadm/funzioni/dati_vetrina.php?id_cat=1&id_com=33859',
+        //morciano : '//www.ugentocasa.it/lista/index/vendita/1/10/json/',
+        morciano : '//www.ugentocasa.it/myadm/funzioni/dati_vetrina.php?id_cat=1&id_com=31110',
+        //patu : '//www.ugentocasa.it/lista/index/vendita/1/11json/',
+        patu : '//www.ugentocasa.it/myadm/funzioni/dati_vetrina.php?id_cat=1&id_com=31113',
+        //taviano : '//www.ugentocasa.it/lista/index/vendita/1/12/json/',
+        taviano : '//www.ugentocasa.it/myadm/funzioni/dati_vetrina.php?id_cat=1&id_com=32156',
+        //alliste : '//www.ugentocasa.it/lista/index/vendita/1/13/json/',
+        alliste : '//www.ugentocasa.it/myadm/funzioni/dati_vetrina.php?id_cat=1&id_com=29727',
+        //gallipoli : '//www.ugentocasa.it/lista/index/vendita/1/14/json/',
+        gallipoli : '//www.ugentocasa.it/myadm/funzioni/dati_vetrina.php?id_cat=1&id_com=34061',
+        //ruggiano : '//www.ugentocasa.it/lista/index/vendita/1/15/json/'
+        ruggiano : '//www.ugentocasa.it/myadm/funzioni/dati_vetrina.php?id_cat=1&id_fraz=38681'
         
 //        taurisano : 'http://www.ugentocasa.it/lista/index/vendita/1/3/json/',
     };
@@ -568,7 +583,8 @@ $(function(){
         function(){
             imgNumber = Math.floor((Math.random() * 3) + 1);
         $('.full').css({
-            "background-image" : "url(http://www.di-vision.org/cdn/images/natale"+imgNumber+".jpg)",
+            //"background-image" : "url(http://www.di-vision.org/cdn/images/natale"+imgNumber+".jpg)",
+            "background-image" : "url(http://www.portocesareoesalento.com/wp-content/uploads/2015/12/il-mare-del-lido-oasis.jpg)",
             "backgroud-repeat" : "no-repeat",
             "backgroud-position" : "center center",
             "backgroud-attachment" :  "fixed",
